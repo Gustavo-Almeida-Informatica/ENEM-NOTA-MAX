@@ -1,0 +1,6 @@
+{
+  "name": "ENEM Nota Max",
+  "description": "Plataforma de estudos completa para o ENEM com resumos objetivos de 60 assuntos, mapas mentais interativos, biblioteca de videoaulas, dicas de gestão de tempo e banco de repertório para redação.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
