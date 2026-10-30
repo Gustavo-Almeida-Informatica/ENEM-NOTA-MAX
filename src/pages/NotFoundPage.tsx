@@ -23,18 +23,18 @@ export const NotFoundPage: React.FC<NotFoundPageProps> = ({ onNavigate }) => {
         description="A página que você procura não foi encontrada. Retorne ao mural de assuntos ou pesquise o conteúdo desejado." 
       />
 
-      <div className="w-16 h-16 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mx-auto shadow-xs">
+      <div className="w-16 h-16 rounded-2xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mx-auto shadow-xs">
         <HelpCircle className="w-8 h-8" />
       </div>
 
       <div className="space-y-2">
-        <span className="text-xs font-bold uppercase tracking-wider text-indigo-600">
+        <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
           Erro 404
         </span>
-        <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+        <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
           Página não encontrada
         </h1>
-        <p className="text-sm text-slate-600 max-w-md mx-auto">
+        <p className="text-sm text-slate-600 dark:text-slate-300 max-w-md mx-auto">
           O link que você seguiu pode estar incorreto ou o conteúdo foi reorganizado. O que você gostaria de estudar agora?
         </p>
       </div>
@@ -46,7 +46,7 @@ export const NotFoundPage: React.FC<NotFoundPageProps> = ({ onNavigate }) => {
           placeholder="Pesquisar assunto (ex: ecologia, porcentagem)..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="flex-1 px-4 py-2 text-sm bg-white border border-slate-300 rounded-xl shadow-2xs focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="flex-1 px-4 py-2 text-sm bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl shadow-2xs focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder:text-slate-400 dark:placeholder:text-slate-500"
         />
         <button
           type="submit"
@@ -60,34 +60,35 @@ export const NotFoundPage: React.FC<NotFoundPageProps> = ({ onNavigate }) => {
       <div className="pt-4 flex flex-wrap items-center justify-center gap-2">
         <button
           onClick={() => onNavigate('/')}
-          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-colors"
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold transition-colors"
         >
           <Compass className="w-3.5 h-3.5" />
           <span>Mural de Assuntos</span>
         </button>
         <button
           onClick={() => onNavigate('/videos')}
-          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-colors"
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold transition-colors"
         >
           <span>Vídeos</span>
         </button>
         <button
           onClick={() => onNavigate('/mapas')}
-          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-colors"
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold transition-colors"
         >
           <span>Mapas Mentais</span>
         </button>
         <button
           onClick={() => onNavigate('/dicas')}
-          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-colors"
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold transition-colors"
         >
           <span>Dicas de Tempo</span>
         </button>
         <button
-          onClick={() => onNavigate('/citacoes')}
-          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-colors"
+          onClick={() => onNavigate('/repertorio')}
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold transition-colors"
         >
-          <span>Citações</span>
+          <BookOpen className="w-3.5 h-3.5" />
+          <span>Repertório</span>
         </button>
       </div>
     </div>

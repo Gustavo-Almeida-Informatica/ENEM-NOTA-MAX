@@ -13,12 +13,15 @@ import {
   CheckCircle,
   HelpCircle,
   TrendingUp,
-  Compass
+  Compass,
+  PenTool
 } from 'lucide-react';
 import { ALL_SUBJECTS } from '../data/topics';
 import { AREAS } from '../data/areas';
 import { EnemArea, Subject } from '../types';
 import { SeoMeta } from '../components/SeoMeta';
+// Importação direta da imagem como módulo para resolução correta pelo Vite no build de produção
+import heroImg from '../assets/images/hero_enem_study_1790795705881.jpg';
 
 interface HomePageProps {
   onNavigate: (path: string) => void;
@@ -27,6 +30,8 @@ interface HomePageProps {
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   const [selectedArea, setSelectedArea] = useState<EnemArea | 'todas'>('todas');
   const [searchQuery, setSearchQuery] = useState('');
+  // Estado para fallback visual caso a imagem falhe ao carregar
+  const [heroImgError, setHeroImgError] = useState(false);
 
   // Filtered subjects
   const filteredSubjects = useMemo(() => {
@@ -63,22 +68,22 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Left Column: Brand & Value Prop */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200/80 text-xs font-semibold text-indigo-700">
-                <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200/80 dark:border-indigo-800 text-xs font-semibold text-indigo-700 dark:text-indigo-300">
+                <Sparkles className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
                 <span>Metodologia Orientada à Coerência TRI</span>
               </div>
 
               <div className="space-y-3">
-                <h1 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-[1.15]">
-                  ENEM <span className="text-indigo-600">Nota Max</span>
+                <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.15]">
+                  ENEM <span className="text-indigo-600 dark:text-indigo-400">Nota Max</span>
                 </h1>
-                <p className="text-lg sm:text-2xl font-serif italic text-slate-700 font-medium">
-                  "Estude menos tempo perdido, mire a nota máxima."
+                <p className="text-lg sm:text-2xl font-serif italic text-slate-700 dark:text-slate-300 font-medium">
+                  "Estude melhor, perca menos tempo, mire na nota máxima."
                 </p>
               </div>
 
-              <p className="text-base text-slate-600 leading-relaxed max-w-xl">
-                Tudo o que você precisa para a prova em um só lugar, sem enrolação. Resumos diretos ao ponto dos 60 temas que mais caem, diagramas mentais interativos, biblioteca de videoaulas e banco de repertório para redação.
+              <p className="text-base text-slate-600 dark:text-slate-300 leading-relaxed max-w-xl">
+                Tudo o que você precisa para a prova em um só lugar, sem enrolação. Resumos diretos ao ponto dos 60 temas que mais caem, mapas mentais interativos, biblioteca de videoaulas e banco de repertórios para redação.
               </p>
 
               {/* CTAs */}
@@ -93,40 +98,52 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
                 <button
                   onClick={() => onNavigate('/mapas')}
-                  className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 font-semibold text-sm transition-colors shadow-2xs"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-semibold text-sm transition-colors shadow-2xs"
                 >
-                  <Network className="w-4 h-4 text-indigo-600" />
+                  <Network className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
                   <span>Mapas Mentais</span>
                 </button>
               </div>
 
               {/* Trust Badges */}
-              <div className="pt-4 border-t border-slate-200/80 flex flex-wrap items-center gap-y-2 gap-x-6 text-xs text-slate-500">
+              <div className="pt-4 border-t border-slate-200/80 dark:border-slate-800 flex flex-wrap items-center gap-y-2 gap-x-6 text-xs text-slate-500 dark:text-slate-400">
                 <span className="flex items-center gap-1.5">
-                  <CheckCircle className="w-4 h-4 text-emerald-600" />
+                  <CheckCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                   60 assuntos com resumos
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <CheckCircle className="w-4 h-4 text-emerald-600" />
-                  6 mapas mentais detalhados
+                  <CheckCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                  Mapas mentais detalhados
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <CheckCircle className="w-4 h-4 text-emerald-600" />
-                  Leitura leve no celular
+                  <CheckCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                  Leitura leve pelo celular
                 </span>
               </div>
             </div>
 
             {/* Right Column: Hero Visual Photography */}
             <div className="lg:col-span-5">
-              <div className="relative rounded-2xl overflow-hidden shadow-xl border border-slate-200/60 aspect-4/3 bg-slate-100 group">
-                <img
-                  src="/src/assets/images/hero_enem_study_1790795705881.jpg"
-                  alt="Espaço de estudos focado para o ENEM com cronograma, anotações e tablet"
-                  className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
-                  referrerPolicy="no-referrer"
-                  loading="eager"
-                />
+              <div className="relative rounded-2xl overflow-hidden shadow-xl border border-slate-200/60 dark:border-slate-800 aspect-4/3 bg-slate-100 dark:bg-slate-900 group">
+                {heroImgError ? (
+                  // Bloco de fundo com o texto alternativo caso a imagem falhe ao carregar (sem ícone quebrado)
+                  <div className="w-full h-full flex items-center justify-center p-6 text-center bg-slate-800 text-slate-300 text-xs sm:text-sm font-medium">
+                    Espaço de estudos focado no ENEM, com cronograma, anotações e tablet
+                  </div>
+                ) : (
+                  <img
+                    src={heroImg}
+                    alt="Espaço de estudos focado no ENEM, com cronograma, anotações e tablet"
+                    className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
+                    referrerPolicy="no-referrer"
+                    loading="eager"
+                    onError={(e) => {
+                      // Em caso de erro, altera o estado e oculta a imagem para exibir o bloco de fallback
+                      setHeroImgError(true);
+                      e.currentTarget.style.display = 'none';
+                    }}
+                  />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4 text-white">
                   <span className="text-[11px] font-bold uppercase tracking-wider text-indigo-300">
@@ -142,86 +159,109 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 4 Core Shortcuts Grid */}
+      {/* Core Shortcuts Grid */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+          <button
+            onClick={() => onNavigate('/corretor')}
+            className="p-5 rounded-2xl bg-white dark:bg-slate-900 border-2 border-indigo-500/80 dark:border-indigo-500 shadow-xs hover:shadow-md transition-all text-left group flex flex-col justify-between relative overflow-hidden"
+          >
+            <span className="absolute top-3 right-3 px-1.5 py-0.5 rounded bg-indigo-100 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 text-[10px] font-extrabold uppercase tracking-wider">
+              Novo
+            </span>
+            <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+              <PenTool className="w-5 h-5" />
+            </div>
+            <div>
+              <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                Corretor de Redação
+              </h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">
+                Envie foto da folha ou digite. Dupla avaliação oficial.
+              </p>
+            </div>
+            <span className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 mt-3 flex items-center gap-1">
+              Corrigir agora →
+            </span>
+          </button>
+
           <button
             onClick={() => onNavigate('/videos')}
-            className="p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs hover:shadow-md hover:border-indigo-300 transition-all text-left group flex flex-col justify-between"
+            className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-2xs hover:shadow-md hover:border-indigo-300 dark:hover:border-indigo-500 transition-all text-left group flex flex-col justify-between"
           >
-            <div className="w-10 h-10 rounded-xl bg-red-50 text-red-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+            <div className="w-10 h-10 rounded-xl bg-red-50 dark:bg-red-950/50 text-red-600 dark:text-red-400 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
               <Video className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-sm sm:text-base font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
+              <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                 Vídeos Educativos
               </h3>
-              <p className="text-xs text-slate-500 mt-1 line-clamp-2">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">
                 Aulas selecionadas dos melhores professores do YouTube.
               </p>
             </div>
-            <span className="text-xs font-semibold text-indigo-600 mt-3 flex items-center gap-1">
+            <span className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 mt-3 flex items-center gap-1">
               Assistir agora →
             </span>
           </button>
 
           <button
-            onClick={() => onNavigate('/dicas')}
-            className="p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs hover:shadow-md hover:border-indigo-300 transition-all text-left group flex flex-col justify-between"
-          >
-            <div className="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-              <Clock className="w-5 h-5" />
-            </div>
-            <div>
-              <h3 className="text-sm sm:text-base font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
-                Dicas de Tempo
-              </h3>
-              <p className="text-xs text-slate-500 mt-1 line-clamp-2">
-                Ordem da prova, 3 min por questão e planejador semanal.
-              </p>
-            </div>
-            <span className="text-xs font-semibold text-indigo-600 mt-3 flex items-center gap-1">
-              Ver estratégias →
-            </span>
-          </button>
-
-          <button
             onClick={() => onNavigate('/mapas')}
-            className="p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs hover:shadow-md hover:border-indigo-300 transition-all text-left group flex flex-col justify-between"
+            className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-2xs hover:shadow-md hover:border-indigo-300 dark:hover:border-indigo-500 transition-all text-left group flex flex-col justify-between"
           >
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+            <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
               <Network className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-sm sm:text-base font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
+              <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                 Mapas Mentais
               </h3>
-              <p className="text-xs text-slate-500 mt-1 line-clamp-2">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">
                 Diagramas visuais interativos com nós explicativos.
               </p>
             </div>
-            <span className="text-xs font-semibold text-indigo-600 mt-3 flex items-center gap-1">
-              Abrir diagramas →
+            <span className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 mt-3 flex items-center gap-1">
+              Abrir mapas →
             </span>
           </button>
 
           <button
-            onClick={() => onNavigate('/citacoes')}
-            className="p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs hover:shadow-md hover:border-indigo-300 transition-all text-left group flex flex-col justify-between"
+            onClick={() => onNavigate('/repertorio')}
+            className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-2xs hover:shadow-md hover:border-indigo-300 dark:hover:border-indigo-500 transition-all text-left group flex flex-col justify-between"
           >
-            <div className="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+            <div className="w-10 h-10 rounded-xl bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
               <Quote className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-sm sm:text-base font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
-                Repertório Redação
+              <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                Banco de Repertórios
               </h3>
-              <p className="text-xs text-slate-500 mt-1 line-clamp-2">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">
                 Citações, leis e dados com 1-clique para copiar.
               </p>
             </div>
-            <span className="text-xs font-semibold text-indigo-600 mt-3 flex items-center gap-1">
-              Ver citações →
+            <span className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 mt-3 flex items-center gap-1">
+              Ver repertórios →
+            </span>
+          </button>
+
+          <button
+            onClick={() => onNavigate('/dicas')}
+            className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-2xs hover:shadow-md hover:border-indigo-300 dark:hover:border-indigo-500 transition-all text-left group flex flex-col justify-between"
+          >
+            <div className="w-10 h-10 rounded-xl bg-sky-50 dark:bg-sky-950/50 text-sky-600 dark:text-sky-400 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+              <Clock className="w-5 h-5" />
+            </div>
+            <div>
+              <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                Dicas de Tempo
+              </h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">
+                Ordem da prova, 3 min por questão e cronograma.
+              </p>
+            </div>
+            <span className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 mt-3 flex items-center gap-1">
+              Ver estratégias →
             </span>
           </button>
         </div>
@@ -231,15 +271,15 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       <section id="mural" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-20">
         <div className="space-y-6">
           {/* Section Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-200 pb-5">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-5">
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 block mb-1">
+              <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 block mb-1">
                 Catálogo de Conteúdos
               </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                 Mural de Assuntos do ENEM
               </h2>
-              <p className="text-sm text-slate-600 mt-1">
+              <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
                 {filteredSubjects.length} conteúdos organizados pelas 5 áreas oficiais do exame.
               </p>
             </div>
@@ -252,12 +292,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 placeholder="Buscar assunto, termo ou autor..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 text-sm bg-white border border-slate-300 rounded-xl shadow-2xs focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all placeholder:text-slate-400"
+                className="w-full pl-10 pr-4 py-2 text-sm bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl shadow-2xs focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:text-white dark:placeholder:text-slate-500 transition-all placeholder:text-slate-400"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-slate-600"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
                 >
                   Limpar
                 </button>
@@ -277,8 +317,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   onClick={() => setSelectedArea(areaKey)}
                   className={`px-3.5 py-2 text-xs font-bold rounded-xl whitespace-nowrap transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 flex items-center gap-1.5 ${
                     isSelected
-                      ? 'bg-slate-900 text-white shadow-xs'
-                      : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+                      ? 'bg-slate-900 dark:bg-indigo-600 text-white shadow-xs'
+                      : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800'
                   }`}
                 >
                   {areaInfo && (
@@ -304,11 +344,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   <div
                     key={subject.slug}
                     onClick={() => onNavigate(`/assunto/${subject.slug}`)}
-                    className="p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs hover:shadow-md hover:border-indigo-400 transition-all cursor-pointer flex flex-col justify-between text-left group"
+                    className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-2xs hover:shadow-md hover:border-indigo-400 dark:hover:border-indigo-500 transition-all cursor-pointer flex flex-col justify-between text-left group"
                   >
                     <div className="space-y-3">
-                      {/* Top area & reading metadata - Zero Pill clean styling */}
-                      <div className="flex items-center justify-between text-xs text-slate-500">
+                      {/* Top area & reading metadata */}
+                      <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
                         <div className="flex items-center gap-1.5 font-semibold" style={{ color: area.color }}>
                           <span 
                             className="w-2 h-2 rounded-full" 
@@ -316,45 +356,45 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                           />
                           <span>{area.shortName}</span>
                         </div>
-                        <span className="text-slate-400">
+                        <span className="text-slate-400 dark:text-slate-500">
                           {subject.readingTimeMinutes} min de leitura
                         </span>
                       </div>
 
                       {/* Title */}
-                      <h3 className="text-base font-bold text-slate-900 group-hover:text-indigo-600 transition-colors line-clamp-2">
+                      <h3 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors line-clamp-2">
                         {subject.title}
                       </h3>
 
                       {/* Short Description */}
-                      <p className="text-xs text-slate-600 leading-relaxed line-clamp-2">
+                      <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2">
                         {subject.shortDescription}
                       </p>
                     </div>
 
                     {/* Card Footer: Badges for Available Formats */}
-                    <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between">
+                    <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
                       <div className="flex items-center gap-1.5">
                         {subject.availableFormats.includes('resumo') && (
-                          <span className="text-[10px] font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded">
+                          <span className="text-[10px] font-bold text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">
                             Resumo
                           </span>
                         )}
                         {subject.availableFormats.includes('video') && (
-                          <span className="text-[10px] font-bold text-red-700 bg-red-50 px-2 py-0.5 rounded flex items-center gap-1">
+                          <span className="text-[10px] font-bold text-red-700 dark:text-red-400 bg-red-50 dark:bg-red-950/60 px-2 py-0.5 rounded flex items-center gap-1">
                             <Video className="w-3 h-3" />
                             Vídeo
                           </span>
                         )}
                         {subject.availableFormats.includes('mapa') && (
-                          <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded flex items-center gap-1">
+                          <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded flex items-center gap-1">
                             <Network className="w-3 h-3" />
                             Mapa mental
                           </span>
                         )}
                       </div>
 
-                      <span className="text-xs font-semibold text-indigo-600 group-hover:translate-x-0.5 transition-transform flex items-center">
+                      <span className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 group-hover:translate-x-0.5 transition-transform flex items-center">
                         Ler →
                       </span>
                     </div>
@@ -363,12 +403,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               })}
             </div>
           ) : (
-            <div className="p-12 text-center bg-white rounded-2xl border border-slate-200 space-y-3">
+            <div className="p-12 text-center bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
               <HelpCircle className="w-10 h-10 text-slate-400 mx-auto" />
-              <h3 className="text-base font-bold text-slate-900">
+              <h3 className="text-base font-bold text-slate-900 dark:text-white">
                 Nenhum assunto encontrado
               </h3>
-              <p className="text-xs text-slate-500 max-w-sm mx-auto">
+              <p className="text-xs text-slate-500 dark:text-slate-400 max-w-sm mx-auto">
                 Não encontramos resultados para "{searchQuery}". Tente usar palavras-chave mais genéricas como "ecologia", "funções" ou "redação".
               </p>
               <button
@@ -376,7 +416,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   setSearchQuery('');
                   setSelectedArea('todas');
                 }}
-                className="mt-2 text-xs font-bold text-indigo-600 hover:underline"
+                className="mt-2 text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:underline"
               >
                 Limpar todos os filtros
               </button>

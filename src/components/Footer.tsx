@@ -7,7 +7,7 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   return (
-    <footer className="bg-slate-900 text-slate-300 pt-16 pb-24 lg:pb-12 border-t border-slate-800">
+    <footer className="bg-slate-900 dark:bg-slate-950 text-slate-300 pt-16 pb-24 lg:pb-12 border-t border-slate-800 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800">
           {/* Brand Info */}
@@ -21,10 +21,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </span>
             </div>
             <p className="text-base text-slate-300 font-medium italic">
-              "Estude menos tempo perdido, mire a nota máxima."
+              "Estude melhor, perca menos tempo, mire na nota máxima."
             </p>
             <p className="text-sm text-slate-400 leading-relaxed max-w-sm">
-              Plataforma autoral de estudos objetivos para o ENEM. Resumos dos 60 assuntos mais cobrados, diagramas mentais interativos, biblioteca de videoaulas e repertório sociocultural para nota 1000.
+              Plataforma autoral de estudos objetivos para o ENEM. Resumos dos 60 assuntos mais cobrados, mapas mentais interativos, biblioteca de videoaulas e banco de repertórios para nota 1000.
             </p>
             <div className="flex items-center gap-3 text-xs text-slate-400 pt-1">
               <span className="flex items-center gap-1">
@@ -63,6 +63,15 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </li>
               <li>
                 <button
+                  onClick={() => onNavigate('/corretor')}
+                  className="hover:text-white transition-colors text-left flex items-center gap-1.5"
+                >
+                  <span>Corretor de Redação com IA</span>
+                  <span className="px-1.5 py-0.2 rounded bg-indigo-500/30 text-indigo-300 text-[10px] font-bold">Novo</span>
+                </button>
+              </li>
+              <li>
+                <button
                   onClick={() => onNavigate('/mapas')}
                   className="hover:text-white transition-colors text-left"
                 >
@@ -79,10 +88,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('/citacoes')}
+                  onClick={() => onNavigate('/repertorio')}
                   className="hover:text-white transition-colors text-left"
                 >
-                  Banco de Repertório & Citações
+                  Banco de Repertórios
                 </button>
               </li>
             </ul>
@@ -145,7 +154,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <p className="text-xs text-slate-400 leading-relaxed">
               Conteúdo com linguagem simples e direta, sintetizado por tópicos essenciais para otimizar suas horas de estudo e garantir a máxima pontuação pela régua TRI.
             </p>
-            <div className="p-3 bg-slate-800/80 rounded-xl border border-slate-700 text-xs text-slate-300">
+            <div className="p-3 bg-slate-800/80 dark:bg-slate-900 rounded-xl border border-slate-700 text-xs text-slate-300">
               <span className="font-semibold text-white block mb-0.5">Dica de Ouro:</span>
               3 minutos por questão é a meta. Não trave nas difíceis: garanta todas as fáceis primeiro!
             </div>

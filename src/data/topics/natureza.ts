@@ -26,7 +26,7 @@ export const NATUREZA_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Em questões sobre poluição de rios com mercúrio ou agrotóxicos, o organismo mais prejudicado é sempre o último elo da cadeia alimentar.',
     relatedVideo: {
-      youtubeId: 'zU9k1_7M3w0',
+      
       title: 'Impactos Ambientais que Mais Caem no ENEM',
       channel: 'Biologia Total com Jubilut',
       durationMinutes: 18
@@ -59,7 +59,7 @@ export const NATUREZA_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Se a questão pedir uma pirâmide invertida, pense em biomassa marinha (fitoplâncton se reproduz muito rápido) ou em pirâmide de números (uma árvore sustentando milhares de pulgões).',
     relatedVideo: {
-      youtubeId: 'bB8k1_9P2w0',
+      
       title: 'Ecologia Básica no ENEM: Relações e Ciclos',
       channel: 'Biologia Total com Jubilut',
       durationMinutes: 17
@@ -91,7 +91,7 @@ export const NATUREZA_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Para eritroblastose: Mãe sempre Rh- e Bebê sempre Rh+. O pai obrigatoriamente é Rh+.',
     relatedVideo: {
-      youtubeId: 'vV7k1_8N2e0',
+      
       title: 'Genética e Biotecnologia no ENEM: Questões Mais Comuns',
       channel: 'Brasil Escola',
       durationMinutes: 16
@@ -122,7 +122,7 @@ export const NATUREZA_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Se houver urgência com risco iminente de morte (veneno de escorpião, tétano ativo), a resposta é SORO.',
     relatedVideo: {
-      youtubeId: 'mM9k1_6P2w0',
+      
       title: 'Soro ou Vacina? O que o ENEM sempre cobra',
       channel: 'Biologia Total com Jubilut',
       durationMinutes: 13
@@ -153,7 +153,7 @@ export const NATUREZA_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Em estufas agrícolas, iluminar as plantas com luz verde é inútil, pois é o comprimento de onda refletido pelas folhas.',
     relatedVideo: {
-      youtubeId: 'jL8p1_4M2w0',
+      
       title: 'Fotossíntese e Respiração Celular no ENEM',
       channel: 'Curso Enem Gratuito',
       durationMinutes: 15
@@ -185,7 +185,7 @@ export const NATUREZA_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Para diminuir a resistência de um chuveiro e deixá-lo mais quente, o resistor metálico deve ser encurtado.',
     relatedVideo: {
-      youtubeId: 'eM7p1_5K2w0',
+      
       title: 'Eletrodinâmica para o ENEM: Circuitos e Contas de Luz',
       channel: 'Professor Ferretto',
       durationMinutes: 20
@@ -217,7 +217,7 @@ export const NATUREZA_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Dizer "abaixe o som da TV" no linguajar da física significa diminuir a frequência (deixá-lo mais grave), e não reduzir a intensidade sonora.',
     relatedVideo: {
-      youtubeId: 'qQ8p1_3M2w0',
+      
       title: 'Ondulatória no ENEM: Todos os Fenômenos Explicados',
       channel: 'Descomplica',
       durationMinutes: 16
@@ -249,7 +249,7 @@ export const NATUREZA_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Dobrar a velocidade de um automóvel multiplica por quatro a energia do impacto em uma batida.',
     relatedVideo: {
-      youtubeId: 'bB7p1_2K2w0',
+      
       title: 'Leis de Newton e Segurança no Trânsito para o ENEM',
       channel: 'Brasil Escola',
       durationMinutes: 14
@@ -281,7 +281,7 @@ export const NATUREZA_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Uma panela de pressão cozinha os alimentos mais rápido porque o aumento de pressão eleva a temperatura de ebulição da água acima de 100°C.',
     relatedVideo: {
-      youtubeId: 'vV8p1_1M2w0',
+      
       title: 'Calorimetria no ENEM: Fórmulas e Fenômenos',
       channel: 'Curso Enem Gratuito',
       durationMinutes: 15
@@ -313,7 +313,7 @@ export const NATUREZA_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Procure carbonos que possuem quatro ligantes totalmente diferentes entre si: eles conferem isomeria óptica e atividade biológica ao fármaco.',
     relatedVideo: {
-      youtubeId: 'mM7p1_0K2w0',
+      
       title: 'Funções Orgânicas no ENEM: Identificação Rápida',
       channel: 'Professor Ferretto',
       durationMinutes: 18
@@ -345,7 +345,7 @@ export const NATUREZA_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Macete infalível: VOGAL com VOGAL, CONSOANTE com CONSOANTE (Ânodo Oxida, Cátodo Reduz).',
     relatedVideo: {
-      youtubeId: 'qQ7p1_9M2w0',
+      
       title: 'Eletroquímica no ENEM: Pilhas e Proteção Catódica',
       channel: 'Descomplica',
       durationMinutes: 16
@@ -376,7 +376,7 @@ export const NATUREZA_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Ao resolver diluição de remédios ou sucos, lembre-se: a quantidade de soluto não muda, apenas o volume total de água aumenta.',
     relatedVideo: {
-      youtubeId: 'bB8p1_8K2w0',
+      
       title: 'Estequiometria sem Mistério para o ENEM',
       channel: 'Brasil Escola',
       durationMinutes: 18

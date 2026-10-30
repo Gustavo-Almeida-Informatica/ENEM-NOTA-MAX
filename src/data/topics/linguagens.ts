@@ -29,7 +29,7 @@ export const LINGUAGENS_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Ao ler a questão, circule o verbo do comando: se pedir "persuadir", procure a conativa; se pedir "informar com exatidão", referencial.',
     relatedVideo: {
-      youtubeId: 'W8oYc2vK6E8',
+      
       title: 'Funções da Linguagem no ENEM: Macetes e Questões',
       channel: 'Professor Noslen',
       durationMinutes: 14
@@ -63,7 +63,7 @@ export const LINGUAGENS_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Se a questão contrapor norma padrão e variante popular, a resposta correta quase sempre exalta a expressividade e a identidade cultural da fala popular.',
     relatedVideo: {
-      youtubeId: 'Jg66GqjW6Z8',
+      
       title: 'Variação Linguística: O que o ENEM mais cobra',
       channel: 'Brasil Escola',
       durationMinutes: 11
@@ -96,7 +96,7 @@ export const LINGUAGENS_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Observe imagens e balões de fala em tirinhas: a graça ou a crítica costuma nascer da quebra de expectativa provocada pela figura de estilo.',
     relatedVideo: {
-      youtubeId: '3qK08Qe9cVE',
+      
       title: 'Figuras de Linguagem Definitivas para o ENEM',
       channel: 'Descomplica',
       durationMinutes: 15
@@ -127,7 +127,7 @@ export const LINGUAGENS_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Relacione os poemas de Drummond e a prosa de Graciliano com temas de redação sobre desigualdade e cidadania.',
     relatedVideo: {
-      youtubeId: 'YIknrK2R7yA',
+      
       title: 'Modernismo no ENEM: As 3 Fases Explicadas',
       channel: 'Débora Aladim',
       durationMinutes: 18
@@ -158,7 +158,7 @@ export const LINGUAGENS_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Ao analisar um texto longo, leia primeiro a fonte no rodapé: se for de uma revista científica, o tom é expositivo; se for jornal de opinião, dissertativo.',
     relatedVideo: {
-      youtubeId: 'b78a9uL1f4c',
+      
       title: 'Diferença entre Gênero e Tipo Textual no ENEM',
       channel: 'Professor Noslen',
       durationMinutes: 12
@@ -189,7 +189,7 @@ export const LINGUAGENS_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Memorize conectivos menos óbvios como "outrossim" (adição), "conquanto" (concessão) e "dessarte" (conclusão).',
     relatedVideo: {
-      youtubeId: 'Fh9_4K1z7n4',
+      
       title: 'Coesão e Conectivos para Arrebentar no ENEM',
       channel: 'Curso Enem Gratuito',
       durationMinutes: 13
@@ -221,7 +221,7 @@ export const LINGUAGENS_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Procure entender o que o artista quis provocar no espectador, em vez de julgar se a obra é "bonita" no sentido clássico.',
     relatedVideo: {
-      youtubeId: 'D8H3j_2W0xY',
+      
       title: 'Vanguardas Europeias para o ENEM em 10 Minutos',
       channel: 'Brasil Escola',
       durationMinutes: 10
@@ -252,7 +252,7 @@ export const LINGUAGENS_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Ao analisar um poema com paradoxos e claro-escuro, pense em Barroco; se houver pastores e vida campestre simples, é Arcadismo.',
     relatedVideo: {
-      youtubeId: 'q5P1k1qA5fU',
+      
       title: 'Barroco e Arcadismo: Diferenças Essenciais no ENEM',
       channel: 'Curso Enem Gratuito',
       durationMinutes: 14
@@ -284,7 +284,7 @@ export const LINGUAGENS_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Procure sempre a palavra-chave que subverte o texto original: ela revelará a intenção do autor modernista.',
     relatedVideo: {
-      youtubeId: 'vC_R3n9Wp_s',
+      
       title: 'Intertextualidade no ENEM: Paródia vs Paráfrase',
       channel: 'Descomplica',
       durationMinutes: 11
@@ -315,7 +315,7 @@ export const LINGUAGENS_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Não olhe apenas para o texto: a resposta muitas vezes está em um detalhe desenhado no canto do cartum.',
     relatedVideo: {
-      youtubeId: 'eK5eZ1X_2mY',
+      
       title: 'Como Interpretar Charges e Publicidade no ENEM',
       channel: 'Brasil Escola',
       durationMinutes: 13
@@ -346,7 +346,7 @@ export const LINGUAGENS_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Esses autores são repertório de ouro para a redação em temas de justiça social, pobreza e direitos fundamentais.',
     relatedVideo: {
-      youtubeId: 'hJ8_9A5q21E',
+      
       title: 'Literatura Contemporânea e Escrevivência no ENEM',
       channel: 'Débora Aladim',
       durationMinutes: 15
@@ -377,7 +377,7 @@ export const LINGUAGENS_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Nunca responda com base no que você acha ou no que o senso comum dita: a resposta deve ser comprovada com linhas do texto.',
     relatedVideo: {
-      youtubeId: 'p0LqW6E7t3Q',
+      
       title: 'Método para Acertar 40+ em Linguagens no ENEM',
       channel: 'Curso Enem Gratuito',
       durationMinutes: 16

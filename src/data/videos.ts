@@ -3,10 +3,11 @@ import { ALL_SUBJECTS } from './topics';
 
 export interface VideoItem {
   id: string;
-  youtubeId: string;
+  youtubeId?: string;
+  query: string;
   title: string;
   channel: string;
-  durationMinutes: number;
+  durationMinutes?: number;
   area: EnemArea;
   subjectTitle: string;
   subjectSlug: string;
@@ -15,10 +16,10 @@ export interface VideoItem {
 
 export const VIDEOS: VideoItem[] = ALL_SUBJECTS.map((subject) => ({
   id: `vid-${subject.slug}`,
-  youtubeId: subject.relatedVideo.youtubeId,
-  title: subject.relatedVideo.title,
-  channel: subject.relatedVideo.channel,
-  durationMinutes: subject.relatedVideo.durationMinutes,
+  query: `${subject.title} ENEM`,
+  title: subject.relatedVideo.title || `${subject.title} - Revisão ENEM`,
+  channel: subject.relatedVideo.channel || 'ENEM Nota Max',
+  durationMinutes: subject.relatedVideo.durationMinutes || 15,
   area: subject.area,
   subjectTitle: subject.title,
   subjectSlug: subject.slug,

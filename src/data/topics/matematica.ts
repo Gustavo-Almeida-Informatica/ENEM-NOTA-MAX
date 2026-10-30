@@ -27,7 +27,7 @@ export const MATEMATICA_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Em problemas de economia de combustível ou rendimento de tintas, confira as unidades (metros para centímetros) antes de cruzar os dados.',
     relatedVideo: {
-      youtubeId: '9oVb2TqM5pI',
+      
       title: 'Razão e Proporção no ENEM: Teoria e Exercícios',
       channel: 'Professor Ferretto',
       durationMinutes: 18
@@ -60,7 +60,7 @@ export const MATEMATICA_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Para calcular 15% de 240: calcule 10% (24), pegue a metade que é 5% (12) e some: 24 + 12 = 36.',
     relatedVideo: {
-      youtubeId: 'Kz8g5A1j8h0',
+      
       title: 'Porcentagem no ENEM: O Guia Definitivo',
       channel: 'Matemática Rio com Procopio',
       durationMinutes: 16
@@ -92,7 +92,7 @@ export const MATEMATICA_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Ao ler "qual competidor foi mais regular", não faça contas complexas: procure aquele com menor variância ou menor desvio padrão.',
     relatedVideo: {
-      youtubeId: 'eK9j1r5V8z0',
+      
       title: 'Média, Mediana e Moda no ENEM: Sem Pegadinhas',
       channel: 'Professor Ferretto',
       durationMinutes: 15
@@ -123,7 +123,7 @@ export const MATEMATICA_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Se a pergunta pedir "maior taxa percentual de aumento", divida a variação pelo valor inicial, em vez de olhar apenas para a altura da barra.',
     relatedVideo: {
-      youtubeId: 'qW7pL3mE9k8',
+      
       title: 'Como Interpretar Gráficos no ENEM Rapidamente',
       channel: 'Descomplica',
       durationMinutes: 12
@@ -155,7 +155,7 @@ export const MATEMATICA_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Lembre-se sempre: 1 litro de água cabe exatamente em um cubo de 10 cm x 10 cm x 10 cm (1 dm³).',
     relatedVideo: {
-      youtubeId: 'oM4j7E2L6nQ',
+      
       title: 'Geometria Espacial: Os Sólidos que Mais Caem no ENEM',
       channel: 'Professor Ferretto',
       durationMinutes: 20
@@ -187,7 +187,7 @@ export const MATEMATICA_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Se uma figura for complexa, calcule a área de um retângulo maior ao redor dela e subtraia os cantos vazios.',
     relatedVideo: {
-      youtubeId: 'uJ9p1M3L4z0',
+      
       title: 'Geometria Plana no ENEM: Fórmulas que Salvam Vidas',
       channel: 'Brasil Escola',
       durationMinutes: 17
@@ -219,7 +219,7 @@ export const MATEMATICA_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Em gráficos de reta, o valor fixo inicial é sempre a altura da reta no eixo vertical.',
     relatedVideo: {
-      youtubeId: 'tK3l6W1m8p0',
+      
       title: 'Função do 1º Grau no ENEM: Questões Resolvidas',
       channel: 'Professor Ferretto',
       durationMinutes: 14
@@ -251,7 +251,7 @@ export const MATEMATICA_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Se você já conhece as duas raízes da equação (x1 e x2), faça Xv = (x1 + x2) / 2 e economize a fórmula de Bhaskara.',
     relatedVideo: {
-      youtubeId: 'yR8_0P4e5k0',
+      
       title: 'Função Quadrática no ENEM: O Segredo do Vértice',
       channel: 'Curso Enem Gratuito',
       durationMinutes: 16
@@ -283,7 +283,7 @@ export const MATEMATICA_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Ao ler "sabendo que o sorteado é mulher", descarte todos os homens do total do denominador.',
     relatedVideo: {
-      youtubeId: 'bV6n9X1k4j0',
+      
       title: 'Probabilidade para o ENEM: Aprenda de Vez',
       channel: 'Professor Ferretto',
       durationMinutes: 18
@@ -314,7 +314,7 @@ export const MATEMATICA_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Se for escolher 3 amigos entre 10 para uma viagem, a ordem não importa: é Combinação!',
     relatedVideo: {
-      youtubeId: 'wF5j7L9k0zQ',
+      
       title: 'Análise Combinatória: Como Diferenciar Arranjo e Combinação',
       channel: 'Descomplica',
       durationMinutes: 15
@@ -346,7 +346,7 @@ export const MATEMATICA_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Um mapa com escala 1:250.000 significa que 1 cm equivale a 2,5 km na vida real.',
     relatedVideo: {
-      youtubeId: 'kL7v9Q2x0wE',
+      
       title: 'Escala no ENEM: Acerte em 2 Minutos',
       channel: 'Brasil Escola',
       durationMinutes: 10
@@ -378,7 +378,7 @@ export const MATEMATICA_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Para lembrar rapidamente das fórmulas: SOH-CAH-TOA (Seno Oposto/Hip, Cosseno Adj/Hip, Tangente Oposto/Adj).',
     relatedVideo: {
-      youtubeId: 'xP8k0M2l4vE',
+      
       title: 'Trigonometria no Triângulo Retângulo para o ENEM',
       channel: 'Professor Ferretto',
       durationMinutes: 16

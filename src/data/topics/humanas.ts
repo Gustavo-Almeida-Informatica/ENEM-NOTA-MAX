@@ -26,7 +26,7 @@ export const HUMANAS_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Conecte a Revolução Industrial com temas de redação sobre precarização contemporânea (como a "uberização" do trabalho).',
     relatedVideo: {
-      youtubeId: 'b7uP0_h7y2o',
+      
       title: 'Revolução Industrial: Resumo Completo para o ENEM',
       channel: 'Débora Aladim',
       durationMinutes: 17
@@ -59,7 +59,7 @@ export const HUMANAS_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Use a frase de Milton Santos ("A globalização perversa produz consumidores em vez de cidadãos") para embasar teses de redação.',
     relatedVideo: {
-      youtubeId: 'qN5k0V2e8yM',
+      
       title: 'Globalização no ENEM: Conceitos e Questões Comentadas',
       channel: 'Brasil Escola',
       durationMinutes: 15
@@ -91,7 +91,7 @@ export const HUMANAS_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Lembre-se: o ENEM nunca glorifica regimes autoritários; as questões sempre ressaltam o valor da democracia e da cidadania.',
     relatedVideo: {
-      youtubeId: 'v8T5e7K1_30',
+      
       title: 'Ditadura Militar no Brasil: Resumo Completo para o ENEM',
       channel: 'Débora Aladim',
       durationMinutes: 22
@@ -122,7 +122,7 @@ export const HUMANAS_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Relacione o DIP com o conceito sociológico de manipulação midiática e controle de narrativas do Estado.',
     relatedVideo: {
-      youtubeId: 'Z9k7qL2v0E8',
+      
       title: 'Era Vargas no ENEM: As 3 Fases sem Decoreba',
       channel: 'Curso Enem Gratuito',
       durationMinutes: 18
@@ -153,7 +153,7 @@ export const HUMANAS_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Use o conceito de Casa-Grande e Senzala para explicar a permanência de privilégios e a marginalização das periferias urbanas.',
     relatedVideo: {
-      youtubeId: 'jW7p2k1_9oA',
+      
       title: 'Brasil Colônia no ENEM: Escravidão e Sociedade',
       channel: 'Brasil Escola',
       durationMinutes: 16
@@ -184,7 +184,7 @@ export const HUMANAS_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Conecte a exclusão na pólis grega com temas de redação sobre minorias que ainda lutam por reconhecimento civil pleno no Brasil.',
     relatedVideo: {
-      youtubeId: 'u7Y6m2P1v4E',
+      
       title: 'Grécia Antiga e Democracia Ateniense para o ENEM',
       channel: 'Débora Aladim',
       durationMinutes: 13
@@ -215,7 +215,7 @@ export const HUMANAS_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Excelente repertório de redação: "Segundo Locke, cabe ao Estado zelar pelos direitos fundamentais dos cidadãos; entretanto, na prática brasileira..."',
     relatedVideo: {
-      youtubeId: 'eQ3k1_9P7Lw',
+      
       title: 'Contratualistas: Hobbes, Locke e Rousseau no ENEM',
       channel: 'Curso Enem Gratuito',
       durationMinutes: 17
@@ -246,7 +246,7 @@ export const HUMANAS_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Citação coringa para redações sobre comportamento e redes: "Na era da modernidade líquida, as relações são conexões voláteis que se desfazem a um clique."',
     relatedVideo: {
-      youtubeId: 'wR2m8P4k1_0',
+      
       title: 'Zygmunt Bauman e Modernidade Líquida: Teoria e Aplicação',
       channel: 'Brasil Escola',
       durationMinutes: 14
@@ -277,7 +277,7 @@ export const HUMANAS_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Em temas de mobilidade e moradia, mencione o Estatuto da Cidade (Lei 10.257) e o direito fundamental à cidade para todos.',
     relatedVideo: {
-      youtubeId: 'b7U8P3k1_90',
+      
       title: 'Urbanização Brasileira no ENEM: Principais Problemas',
       channel: 'Descomplica',
       durationMinutes: 15
@@ -308,7 +308,7 @@ export const HUMANAS_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Entenda os biomas não como paisagens isoladas, mas como sistemas integrados essenciais para a segurança hídrica e alimentar do país.',
     relatedVideo: {
-      youtubeId: 'pP8k1_7M2w0',
+      
       title: 'Biomas Brasileiros e Clima no ENEM: Resumo Rápido',
       channel: 'Curso Enem Gratuito',
       durationMinutes: 16
@@ -339,7 +339,7 @@ export const HUMANAS_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Relacione migrações com direitos humanos universais previstos na Declaração da ONU de 1948.',
     relatedVideo: {
-      youtubeId: 'qQ9k1_8P3mE',
+      
       title: 'Geopolítica e Conflitos Mundiais no ENEM',
       channel: 'Brasil Escola',
       durationMinutes: 18
@@ -370,7 +370,7 @@ export const HUMANAS_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Em temas de cultura, argumente que valorizar o patrimônio imaterial é fundamental para combater a homogeneização cultural globalizante.',
     relatedVideo: {
-      youtubeId: 'wE7p2_9K1mA',
+      
       title: 'Patrimônio Cultural Material e Imaterial no ENEM',
       channel: 'Curso Enem Gratuito',
       durationMinutes: 12

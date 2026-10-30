@@ -16,11 +16,12 @@ export interface AreaInfo {
 export type SubjectBadge = 'resumo' | 'video' | 'mapa';
 
 export interface RelatedVideo {
-  youtubeId: string;
+  youtubeId?: string;
   title: string;
   channel: string;
-  durationMinutes: number;
+  durationMinutes?: number;
   description?: string;
+  searchQuery?: string;
 }
 
 export interface Subject {
@@ -46,25 +47,36 @@ export interface MindMapNode {
   color?: string;
   summary: string;
   enemTips?: string;
+  videoQuery?: string;
   relatedSubjectSlug?: string;
   children?: MindMapNode[];
+  isExpanded?: boolean;
 }
 
 export interface MindMap {
   id: string;
   title: string;
   theme: string;
-  area: EnemArea;
+  area?: EnemArea;
   description: string;
   rootNode: MindMapNode;
 }
+
+export type CitationCategory = 
+  | 'filosofia' 
+  | 'legislacao' 
+  | 'literatura' 
+  | 'cinema' 
+  | 'musica' 
+  | 'dados' 
+  | 'historia';
 
 export interface Citation {
   id: string;
   quote: string;
   authorOrSource: string;
   roleOrWork: string;
-  category: 'filosofia' | 'legislacao' | 'literatura' | 'dados';
+  category: CitationCategory;
   thematicAxes: string[];
   howToUse: string;
   contextExample: string;

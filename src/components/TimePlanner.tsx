@@ -99,7 +99,7 @@ export const TimePlanner: React.FC = () => {
     const text = `Meu Cronograma ENEM Nota Max:\nHoras Semanais: ${weeklyHours}h (${activeProfile.label})\n` +
       areaAllocations.map((a) => `- ${a.name}: ${a.hours}h (${a.percentage}%)`).join('\n') +
       `\n- Redações por semana: ${essaysCount}\n- Horas de Simulado e Análise de Erros: ${reviewHours}h\n` +
-      `"Estude menos tempo perdido, mire a nota máxima."`;
+      `"Estude melhor, perca menos tempo, mire na nota máxima."`;
     
     navigator.clipboard.writeText(text);
     setCopied(true);
@@ -107,33 +107,33 @@ export const TimePlanner: React.FC = () => {
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-8">
+    <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm p-6 sm:p-8 space-y-8 transition-colors">
       {/* Title & Slogan */}
       <div>
-        <div className="flex items-center gap-2 text-indigo-600 text-xs font-bold uppercase tracking-wider mb-1">
+        <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 text-xs font-bold uppercase tracking-wider mb-1">
           <Clock className="w-4 h-4" />
           <span>Ferramenta Interativa</span>
         </div>
-        <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
+        <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">
           Planejador Inteligente de Horas Semanais
         </h3>
-        <p className="text-sm text-slate-600 mt-1 max-w-2xl">
+        <p className="text-sm text-slate-600 dark:text-slate-300 mt-1 max-w-2xl">
           Informe quanto tempo você tem disponível na semana e o site calcula a divisão matemática ideal por área de conhecimento, priorizando a coerência TRI.
         </p>
       </div>
 
       {/* Input Slider */}
-      <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-4">
+      <div className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700 space-y-4">
         <div className="flex items-center justify-between">
           <label 
             htmlFor="hours-slider" 
-            className="text-sm font-bold text-slate-900 flex items-center gap-2"
+            className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2"
           >
             <span>Quantas horas você pode estudar por semana?</span>
           </label>
-          <div className="flex items-baseline gap-1 bg-white px-3 py-1 rounded-lg border border-slate-200 shadow-2xs font-extrabold text-indigo-600 text-lg tabular-nums">
+          <div className="flex items-baseline gap-1 bg-white dark:bg-slate-900 px-3 py-1 rounded-lg border border-slate-200 dark:border-slate-700 shadow-2xs font-extrabold text-indigo-600 dark:text-indigo-400 text-lg tabular-nums">
             <span>{weeklyHours}</span>
-            <span className="text-xs text-slate-500 font-medium">horas</span>
+            <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">horas</span>
           </div>
         </div>
 
@@ -145,10 +145,10 @@ export const TimePlanner: React.FC = () => {
           step="1"
           value={weeklyHours}
           onChange={(e) => setWeeklyHours(Number(e.target.value))}
-          className="w-full h-2.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
+          className="w-full h-2.5 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-indigo-600"
         />
 
-        <div className="flex justify-between text-[11px] text-slate-600 font-medium px-1">
+        <div className="flex justify-between text-[11px] text-slate-600 dark:text-slate-400 font-medium px-1">
           <span>4h (Reta final leve)</span>
           <span>15h (Ideal para quem trabalha)</span>
           <span>30h (Dedicado)</span>
@@ -158,7 +158,7 @@ export const TimePlanner: React.FC = () => {
 
       {/* Profile Selector */}
       <div className="space-y-3">
-        <label className="text-sm font-bold text-slate-900 block">
+        <label className="text-sm font-bold text-slate-900 dark:text-white block">
           Escolha seu objetivo ou perfil de estudo:
         </label>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
@@ -170,17 +170,17 @@ export const TimePlanner: React.FC = () => {
                 onClick={() => setSelectedProfileId(profile.id)}
                 className={`p-3.5 rounded-xl border text-left transition-all ${
                   isSelected
-                    ? 'border-indigo-600 bg-indigo-50/50 shadow-xs'
-                    : 'border-slate-200 hover:border-slate-300 bg-white'
+                    ? 'border-indigo-600 bg-indigo-50/50 dark:bg-indigo-950/50 shadow-xs'
+                    : 'border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 bg-white dark:bg-slate-800'
                 }`}
               >
                 <div className="flex items-center justify-between mb-1">
-                  <span className={`text-xs font-bold ${isSelected ? 'text-indigo-900' : 'text-slate-900'}`}>
+                  <span className={`text-xs font-bold ${isSelected ? 'text-indigo-900 dark:text-indigo-300' : 'text-slate-900 dark:text-slate-200'}`}>
                     {profile.label}
                   </span>
-                  {isSelected && <Check className="w-4 h-4 text-indigo-600" />}
+                  {isSelected && <Check className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />}
                 </div>
-                <p className="text-[11px] text-slate-500 leading-normal">
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-normal">
                   {profile.description}
                 </p>
               </button>
@@ -192,20 +192,20 @@ export const TimePlanner: React.FC = () => {
       {/* Allocation Results */}
       <div className="space-y-4 pt-2">
         <div className="flex items-center justify-between">
-          <h4 className="text-base font-bold text-slate-900">
+          <h4 className="text-base font-bold text-slate-900 dark:text-white">
             Divisão Sugerida por Área ({weeklyHours}h / semana)
           </h4>
           <button
             onClick={handleCopyPlan}
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 hover:text-indigo-800 bg-indigo-50 hover:bg-indigo-100 px-3 py-1.5 rounded-lg transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 bg-indigo-50 dark:bg-indigo-950/60 hover:bg-indigo-100 dark:hover:bg-indigo-900/60 px-3 py-1.5 rounded-lg transition-colors"
           >
-            {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
+            {copied ? <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
             <span>{copied ? 'Cronograma Copiado!' : 'Copiar Cronograma'}</span>
           </button>
         </div>
 
         {/* Visual Progress Bar */}
-        <div className="h-4 w-full bg-slate-100 rounded-full overflow-hidden flex shadow-inner">
+        <div className="h-4 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden flex shadow-inner">
           {areaAllocations.map((item) => (
             <div
               key={item.areaKey}
@@ -224,24 +224,24 @@ export const TimePlanner: React.FC = () => {
           {areaAllocations.map((item) => (
             <div
               key={item.areaKey}
-              className="p-3.5 rounded-xl border border-slate-200/90 bg-white space-y-1.5"
+              className="p-3.5 rounded-xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-800/60 space-y-1.5"
             >
               <div className="flex items-center gap-1.5">
                 <span 
                   className="w-2.5 h-2.5 rounded-full shrink-0" 
                   style={{ backgroundColor: item.color }} 
                 />
-                <span className="text-xs font-bold text-slate-800 truncate">
+                <span className="text-xs font-bold text-slate-800 dark:text-slate-200 truncate">
                   {item.name}
                 </span>
               </div>
               <div className="flex items-baseline gap-1">
-                <span className="text-xl font-extrabold text-slate-900 tabular-nums">
+                <span className="text-xl font-extrabold text-slate-900 dark:text-white tabular-nums">
                   {item.hours}
                 </span>
-                <span className="text-xs text-slate-500 font-medium">h/semana</span>
+                <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">h/semana</span>
               </div>
-              <span className="text-[10px] text-slate-400 block tabular-nums">
+              <span className="text-[10px] text-slate-400 dark:text-slate-500 block tabular-nums">
                 {item.percentage}% do total
               </span>
             </div>
@@ -251,38 +251,38 @@ export const TimePlanner: React.FC = () => {
 
       {/* Recommended Strategy Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-        <div className="p-4 rounded-xl bg-rose-50/70 border border-rose-200 text-rose-950 space-y-1">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-rose-700 block">
+        <div className="p-4 rounded-xl bg-rose-50/70 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/60 text-rose-950 dark:text-rose-200 space-y-1">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-rose-700 dark:text-rose-400 block">
             Meta de Redação
           </span>
-          <p className="text-base font-extrabold text-rose-900">
+          <p className="text-base font-extrabold text-rose-900 dark:text-rose-100">
             {essaysCount} {essaysCount === 1 ? 'redação cronometrada' : 'redações completas'}/sem
           </p>
-          <p className="text-xs text-rose-800/80 leading-relaxed">
+          <p className="text-xs text-rose-800/80 dark:text-rose-300 leading-relaxed">
             Escreva na folha modelo em até 70 minutos para acostumar a mão e a mente.
           </p>
         </div>
 
-        <div className="p-4 rounded-xl bg-amber-50/70 border border-amber-200 text-amber-950 space-y-1">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-amber-700 block">
+        <div className="p-4 rounded-xl bg-amber-50/70 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900/60 text-amber-950 dark:text-amber-200 space-y-1">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400 block">
             Análise de Erros
           </span>
-          <p className="text-base font-extrabold text-amber-900">
+          <p className="text-base font-extrabold text-amber-900 dark:text-amber-100">
             {reviewHours}h reservadas/sem
           </p>
-          <p className="text-xs text-amber-800/80 leading-relaxed">
+          <p className="text-xs text-amber-800/80 dark:text-amber-300 leading-relaxed">
             Revise no sábado exatamente as questões que você errou em listas anteriores.
           </p>
         </div>
 
-        <div className="p-4 rounded-xl bg-emerald-50/70 border border-emerald-200 text-emerald-950 space-y-1">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-700 block">
+        <div className="p-4 rounded-xl bg-emerald-50/70 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-900/60 text-emerald-950 dark:text-emerald-200 space-y-1">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 block">
             Descanso Ativo
           </span>
-          <p className="text-base font-extrabold text-emerald-900">
+          <p className="text-base font-extrabold text-emerald-900 dark:text-emerald-100">
             1 dia livre na semana
           </p>
-          <p className="text-xs text-emerald-800/80 leading-relaxed">
+          <p className="text-xs text-emerald-800/80 dark:text-emerald-300 leading-relaxed">
             O sono de qualidade consolida as conexões sinápticas da memória de longo prazo.
           </p>
         </div>

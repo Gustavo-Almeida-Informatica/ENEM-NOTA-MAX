@@ -27,7 +27,7 @@ export const REDACAO_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Nunca comece a escrever antes de planejar o seu projeto de texto em tópicos de 1 linha para cada parágrafo.',
     relatedVideo: {
-      youtubeId: 'xP7k1_4M2w0',
+      
       title: 'Estrutura Completa da Redação Nota 1000 no ENEM',
       channel: 'Débora Aladim',
       durationMinutes: 19
@@ -60,7 +60,7 @@ export const REDACAO_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Troque a palavra feminina após a preposição por uma masculina; se virar "ao", há crase! Ex: "Foi à escola" -> "Foi ao colégio".',
     relatedVideo: {
-      youtubeId: 'mM8k1_3P2w0',
+      
       title: 'Competência 1 da Redação ENEM: Erros que Tiram Pontos',
       channel: 'Professor Noslen',
       durationMinutes: 14
@@ -91,7 +91,7 @@ export const REDACAO_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Sempre faça o arremate da citação: "De maneira análoga ao pensamento de [Autor], constata-se no Brasil que..."',
     relatedVideo: {
-      youtubeId: 'qQ9p1_1M2w0',
+      
       title: 'Repertório Sociocultural Produtivo na Redação do ENEM',
       channel: 'Débora Aladim',
       durationMinutes: 16
@@ -122,7 +122,7 @@ export const REDACAO_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Insira palavras com juízo de valor em todas as frases argumentativas para comprovar a defesa ativa da sua tese.',
     relatedVideo: {
-      youtubeId: 'bB9p1_7K2w0',
+      
       title: 'Como Tirar 200 na Competência 3 da Redação ENEM',
       channel: 'Descomplica',
       durationMinutes: 15
@@ -154,7 +154,7 @@ export const REDACAO_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Inicie o D2 com "Ademais" ou "Outrossim", e a Conclusão com "Portanto" ou "Dessarte". É regra de ouro para garantir os 200 pontos.',
     relatedVideo: {
-      youtubeId: 'vV9p1_5M2w0',
+      
       title: 'Os Conectivos Obrigatórios para a Redação do ENEM',
       channel: 'Curso Enem Gratuito',
       durationMinutes: 14
@@ -187,7 +187,7 @@ export const REDACAO_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Decore a estrutura: "[Agente], [Detalhamento do Agente], deve [Ação], mediante [Meio], a fim de [Efeito]."',
     relatedVideo: {
-      youtubeId: 'mM9p1_3K2w0',
+      
       title: 'Proposta de Intervenção Nota 200: Passo a Passo Infalível',
       channel: 'Débora Aladim',
       durationMinutes: 17
@@ -218,7 +218,7 @@ export const REDACAO_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Sublinhe as palavras-chave da proposta do ENEM e garanta que todas elas constem na sua frase temática da introdução.',
     relatedVideo: {
-      youtubeId: 'qQ9p1_2M2w0',
+      
       title: 'A Introdução que Conquistou a Nota 1000 no ENEM',
       channel: 'Professor Noslen',
       durationMinutes: 13
@@ -250,7 +250,7 @@ export const REDACAO_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Reserve no D1 a análise da esfera pública (leis, fiscalização, investimentos) ou da herança histórica.',
     relatedVideo: {
-      youtubeId: 'bB9p1_1K2w0',
+      
       title: 'Como Fazer o Parágrafo de Desenvolvimento 1 Perfeito',
       channel: 'Débora Aladim',
       durationMinutes: 15
@@ -282,7 +282,7 @@ export const REDACAO_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Use o D2 para demonstrar empatia com as pessoas que mais sofrem na ponta com o problema temático.',
     relatedVideo: {
-      youtubeId: 'vV9p1_0M2w0',
+      
       title: 'Desenvolvimento 2 na Redação do ENEM sem Erros',
       channel: 'Descomplica',
       durationMinutes: 14
@@ -313,7 +313,7 @@ export const REDACAO_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Jamais proponha medidas punitivas extremas (pena de morte, tortura, trabalho forçado): isso zera a Competência 5 na hora.',
     relatedVideo: {
-      youtubeId: 'qQ9p1_7M2w0',
+      
       title: '7 Erros que Podem Zerar Sua Redação no ENEM',
       channel: 'Brasil Escola',
       durationMinutes: 12
@@ -345,7 +345,7 @@ export const REDACAO_TOPICS: Subject[] = [
     ],
     practicalApplication: 'Se errar na folha oficial: faça apenas "exemplo" com um traço reto e continue escrevendo normalmente.',
     relatedVideo: {
-      youtubeId: 'bB9p1_3K2w0',
+      
       title: 'Checklist Definitivo antes de Passar a Redação a Limpo',
       channel: 'Curso Enem Gratuito',
       durationMinutes: 11

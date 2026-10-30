@@ -98,32 +98,32 @@ export const MindMapViewer: React.FC<MindMapViewerProps> = ({
   });
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden flex flex-col">
+    <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-sm overflow-hidden flex flex-col transition-colors">
       {/* Mind Map Header & Controls */}
-      <div className="px-5 py-4 border-b border-slate-200 flex flex-wrap items-center justify-between gap-3 bg-slate-50/70">
+      <div className="px-5 py-4 border-b border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3 bg-slate-50/70 dark:bg-slate-900">
         <div>
           <div className="flex items-center gap-2">
             <span 
               className="w-3 h-3 rounded-full" 
               style={{ backgroundColor: root.color || '#6366F1' }} 
             />
-            <h2 className="text-base sm:text-lg font-bold text-slate-900">
+            <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
               {mindMap.title}
             </h2>
           </div>
-          <p className="text-xs text-slate-500 mt-0.5">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
             {mindMap.description}
           </p>
         </div>
 
         {/* Action Controls */}
-        <div className="flex items-center gap-1.5 bg-white p-1 rounded-xl border border-slate-200 shadow-2xs">
+        <div className="flex items-center gap-1.5 bg-white dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
           <button
             onClick={() => setViewMode(viewMode === 'visual' ? 'outline' : 'visual')}
             className={`px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors ${
               viewMode === 'visual' 
-                ? 'bg-indigo-50 text-indigo-700' 
-                : 'text-slate-600 hover:text-slate-900'
+                ? 'bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300' 
+                : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
             }`}
             title="Alternar entre Diagrama e Lista"
           >
@@ -135,24 +135,24 @@ export const MindMapViewer: React.FC<MindMapViewerProps> = ({
 
           {viewMode === 'visual' && (
             <>
-              <div className="w-px h-4 bg-slate-200 my-auto" />
+              <div className="w-px h-4 bg-slate-200 dark:bg-slate-700 my-auto" />
               <button
                 onClick={handleZoomIn}
-                className="p-1.5 text-slate-600 hover:text-indigo-600 hover:bg-slate-100 rounded-lg transition-colors"
+                className="p-1.5 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
                 title="Aumentar Zoom"
               >
                 <ZoomIn className="w-4 h-4" />
               </button>
               <button
                 onClick={handleZoomOut}
-                className="p-1.5 text-slate-600 hover:text-indigo-600 hover:bg-slate-100 rounded-lg transition-colors"
+                className="p-1.5 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
                 title="Diminuir Zoom"
               >
                 <ZoomOut className="w-4 h-4" />
               </button>
               <button
                 onClick={handleReset}
-                className="p-1.5 text-slate-600 hover:text-indigo-600 hover:bg-slate-100 rounded-lg transition-colors"
+                className="p-1.5 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
                 title="Resetar Posição"
               >
                 <RotateCcw className="w-4 h-4" />
@@ -321,13 +321,13 @@ export const MindMapViewer: React.FC<MindMapViewerProps> = ({
         </div>
       ) : (
         /* Accessible Mobile/Outline View */
-        <div className="p-5 space-y-4 max-h-[520px] overflow-y-auto">
-          <div className="p-4 rounded-xl bg-indigo-50/70 border border-indigo-200 text-indigo-950">
-            <span className="text-xs font-bold uppercase tracking-wider text-indigo-700 block mb-1">
+        <div className="p-5 space-y-4 max-h-[520px] overflow-y-auto bg-slate-50/50 dark:bg-slate-900/50">
+          <div className="p-4 rounded-xl bg-indigo-50/70 dark:bg-indigo-950/50 border border-indigo-200 dark:border-indigo-800 text-indigo-950 dark:text-indigo-200">
+            <span className="text-xs font-bold uppercase tracking-wider text-indigo-700 dark:text-indigo-400 block mb-1">
               Conceito Raiz
             </span>
             <h3 className="text-lg font-bold">{root.label}</h3>
-            <p className="text-sm text-indigo-900/80 mt-1">{root.summary}</p>
+            <p className="text-sm text-indigo-900/80 dark:text-indigo-200/80 mt-1">{root.summary}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -335,10 +335,10 @@ export const MindMapViewer: React.FC<MindMapViewerProps> = ({
               <div
                 key={child.id}
                 onClick={() => setSelectedNode(child)}
-                className={`p-4 rounded-xl border text-left cursor-pointer transition-all hover:border-indigo-300 hover:shadow-xs ${
+                className={`p-4 rounded-xl border text-left cursor-pointer transition-all hover:border-indigo-300 dark:hover:border-indigo-500 hover:shadow-xs ${
                   selectedNode?.id === child.id 
-                    ? 'border-indigo-500 bg-indigo-50/30' 
-                    : 'border-slate-200 bg-white'
+                    ? 'border-indigo-500 bg-indigo-50/30 dark:bg-indigo-950/40' 
+                    : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/80'
                 }`}
               >
                 <div className="flex items-center justify-between mb-1.5">
@@ -347,15 +347,15 @@ export const MindMapViewer: React.FC<MindMapViewerProps> = ({
                       className="w-2.5 h-2.5 rounded-full" 
                       style={{ backgroundColor: child.color || '#6366F1' }} 
                     />
-                    <h4 className="text-sm font-bold text-slate-900">{child.label}</h4>
+                    <h4 className="text-sm font-bold text-slate-900 dark:text-white">{child.label}</h4>
                   </div>
                   <ArrowRight className="w-4 h-4 text-slate-400" />
                 </div>
-                <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed">
+                <p className="text-xs text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed">
                   {child.summary}
                 </p>
                 {child.enemTips && (
-                  <span className="inline-block mt-2 text-[11px] font-medium text-indigo-600">
+                  <span className="inline-block mt-2 text-[11px] font-medium text-indigo-600 dark:text-indigo-400">
                     Dica de prova disponível →
                   </span>
                 )}
@@ -367,7 +367,7 @@ export const MindMapViewer: React.FC<MindMapViewerProps> = ({
 
       {/* Selected Node Details Drawer/Modal */}
       {selectedNode && (
-        <div className="border-t border-slate-200 bg-white p-5 animate-in fade-in slide-in-from-bottom-2 duration-150">
+        <div className="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 animate-in fade-in slide-in-from-bottom-2 duration-150">
           <div className="flex items-start justify-between gap-4">
             <div className="space-y-1">
               <div className="flex items-center gap-2">
@@ -375,42 +375,42 @@ export const MindMapViewer: React.FC<MindMapViewerProps> = ({
                   className="w-2.5 h-2.5 rounded-full" 
                   style={{ backgroundColor: selectedNode.color || '#6366F1' }} 
                 />
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                   Explicação do Ramo
                 </span>
               </div>
-              <h3 className="text-lg font-bold text-slate-900">
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white">
                 {selectedNode.label}
               </h3>
             </div>
             <button
               onClick={() => setSelectedNode(null)}
-              className="p-1 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+              className="p-1 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               aria-label="Fechar detalhes do nó"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
 
-          <p className="text-sm text-slate-700 mt-3 leading-relaxed">
+          <p className="text-sm text-slate-700 dark:text-slate-200 mt-3 leading-relaxed">
             {selectedNode.summary}
           </p>
 
           {selectedNode.enemTips && (
-            <div className="mt-3 p-3 rounded-xl bg-amber-50/80 border border-amber-200 text-xs text-amber-900 flex items-start gap-2">
-              <Sparkles className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+            <div className="mt-3 p-3 rounded-xl bg-amber-50/80 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900/60 text-xs text-amber-900 dark:text-amber-200 flex items-start gap-2">
+              <Sparkles className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
               <div>
                 <span className="font-bold block mb-0.5">O que mais cai no ENEM:</span>
-                <p className="text-amber-800 leading-relaxed">{selectedNode.enemTips}</p>
+                <p className="text-amber-800 dark:text-amber-200 leading-relaxed">{selectedNode.enemTips}</p>
               </div>
             </div>
           )}
 
           {selectedNode.relatedSubjectSlug && onNavigateToSubject && (
-            <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-end">
+            <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-end">
               <button
                 onClick={() => onNavigateToSubject(selectedNode.relatedSubjectSlug!)}
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-600 hover:text-indigo-800 hover:underline"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 hover:underline"
               >
                 <span>Ver Resumo Completo do Assunto</span>
                 <ArrowRight className="w-3.5 h-3.5" />

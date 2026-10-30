@@ -7,6 +7,7 @@ import { SubjectDetailPage } from './pages/SubjectDetailPage';
 import { TimeTipsPage } from './pages/TimeTipsPage';
 import { MindMapsPage } from './pages/MindMapsPage';
 import { CitationsPage } from './pages/CitationsPage';
+import { CorretorPage } from './pages/CorretorPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
 export default function App() {
@@ -107,8 +108,23 @@ export default function App() {
       return <MindMapsPage initialMapId={initialMapId} onNavigate={handleNavigate} />;
     }
 
-    // Route 6: Citations & Repertoire
+    // Route 6: Repertoire (formerly Citations)
+    if (cleanPath === '/repertorio') {
+      return <CitationsPage onNavigate={handleNavigate} />;
+    }
+
+    // Route 7: Corretor de Redação
+    if (cleanPath === '/corretor') {
+      return <CorretorPage onNavigate={handleNavigate} />;
+    }
+
+    // Redirect legacy /citacoes to /repertorio
     if (cleanPath === '/citacoes') {
+      if (typeof window !== 'undefined') {
+        try {
+          window.history.replaceState({}, '', '/repertorio');
+        } catch (_) {}
+      }
       return <CitationsPage onNavigate={handleNavigate} />;
     }
 
@@ -117,7 +133,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans selection:bg-indigo-100 selection:text-indigo-900">
+    <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 flex flex-col font-sans selection:bg-indigo-100 selection:text-indigo-900 dark:selection:bg-indigo-900 dark:selection:text-indigo-100 transition-colors duration-200">
       <Navbar currentPath={currentPath} onNavigate={handleNavigate} />
       <main className="flex-1">
         {renderCurrentRoute()}
