@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import { GoogleGenAI, Type, ThinkingLevel } from '@google/genai';
 
 dotenv.config();
+process.env.DISABLE_HMR = 'true';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -308,7 +309,19 @@ const EXCLUDED_MODEL_SUBSTRINGS = [
   'veo',
   'robotics',
   'computer-use',
-  'aqa'
+  'aqa',
+  'omni',
+  'argon',
+  '2.5',
+  '2.0',
+  '1.5',
+  '1.0',
+  'deep-research',
+  'antigravity',
+  'lyria',
+  'transcribe',
+  'banana',
+  'gemma'
 ];
 
 // In-memory 404 cache: models that returned 404 are excluded for 10 minutes
@@ -332,14 +345,14 @@ function isModel404Excluded(modelName: string): boolean {
   return false;
 }
 
-// In-memory congested cache: modelos que retornaram 503 (alta demanda) ou 429 são priorizados no fim da fila por 2 minutos
+// In-memory congested cache: modelos que retornaram 503 (alta demanda) ou 429 são priorizados no fim da fila por 10 minutos
 const congestedModels = new Map<string, number>();
-const CONGESTED_CACHE_TTL_MS = 2 * 60 * 1000; // 2 minutos
+const CONGESTED_CACHE_TTL_MS = 10 * 60 * 1000; // 10 minutos
 
 function markModelCongested(modelName: string): void {
   const clean = modelName.replace(/^models\//, '').trim();
   congestedModels.set(clean, Date.now());
-  console.warn(`[Gemini Sobrecarga Cache] Modelo "${clean}" sobrecarregado (503/429). Priorizando outros modelos por 2 minutos.`);
+  console.warn(`[Gemini Sobrecarga Cache] Modelo "${clean}" sobrecarregado (503/429). Priorizando outros modelos por 10 minutos.`);
 }
 
 function isModelCongested(modelName: string): boolean {
@@ -428,8 +441,8 @@ function resolveConfiguredModels(
     ? true
     : Boolean(discoveryInput?.succeeded);
 
-  const primaryModel = (process.env.GEMINI_MODEL || 'gemini-flash-latest').trim();
-  const fallbackEnv = process.env.GEMINI_FALLBACK_MODELS || 'gemini-flash-lite-latest, gemini-2.5-flash, gemini-2.5-flash-lite';
+  const primaryModel = (process.env.GEMINI_MODEL || 'gemini-3.8-flash').trim();
+  const fallbackEnv = process.env.GEMINI_FALLBACK_MODELS || 'gemini-3.8-flash, gemini-flash-latest, gemini-3.1-flash-lite, gemini-flash-lite-latest';
   const fallbackModels = fallbackEnv
     .split(',')
     .map((m) => m.trim())
@@ -441,10 +454,12 @@ function resolveConfiguredModels(
     // REQUIREMENT 3: "NUNCA tente um modelo que não esteja na lista retornada pela API."
     candidatePool = models.filter((m) => !isModel404Excluded(m));
   } else {
-    // REQUIREMENT 3: "Se models.list() falhar, use apenas os apelidos 'gemini-flash-latest' e 'gemini-flash-lite-latest' e as variáveis de ambiente."
+    // REQUIREMENT 3: "Se models.list() falhar, use apenas os apelidos recomendados e as variáveis de ambiente."
     candidatePool = Array.from(new Set([
       primaryModel,
+      'gemini-3.8-flash',
       'gemini-flash-latest',
+      'gemini-3.1-flash-lite',
       'gemini-flash-lite-latest',
       ...fallbackModels
     ])).filter((m) => !isModel404Excluded(m));
@@ -457,11 +472,12 @@ function resolveConfiguredModels(
 
   // REQUIREMENT 2: Ordem de preferência para texto (JSON):
   // 1) primeiro o que estiver em GEMINI_MODEL, se EXISTIR na lista;
-  // 2) depois "gemini-flash-latest";
-  // 3) depois os modelos "flash" estáveis (sem "preview"/"exp") do mais novo para o mais antigo;
-  // 4) depois os "flash-lite";
-  // 5) por último os "preview" flash.
-  // 6) quaisquer outros modelos descobertos remanescentes.
+  // 2) depois "gemini-3.8-flash";
+  // 3) depois "gemini-flash-latest";
+  // 4) depois os modelos "flash" estáveis (sem "preview"/"exp") do mais novo para o mais antigo;
+  // 5) depois os "flash-lite";
+  // 6) por último os "preview" flash.
+  // 7) quaisquer outros modelos descobertos remanescentes.
 
   const orderedCandidates: string[] = [];
   const added = new Set<string>();
@@ -478,7 +494,17 @@ function resolveConfiguredModels(
     addCandidate(primaryModel);
   }
 
-  // 2) depois "gemini-flash-latest"
+  // 2) depois "gemini-3.8-flash"
+  if (candidatePool.includes('gemini-3.8-flash')) {
+    addCandidate('gemini-3.8-flash');
+  }
+
+  // 3) depois "gemini-3.1-flash-lite" (rápido e altamente responsivo)
+  if (candidatePool.includes('gemini-3.1-flash-lite')) {
+    addCandidate('gemini-3.1-flash-lite');
+  }
+
+  // 4) depois "gemini-flash-latest"
   if (candidatePool.includes('gemini-flash-latest')) {
     addCandidate('gemini-flash-latest');
   }
@@ -676,13 +702,18 @@ async function createServer() {
       };
 
       try {
+        const isGemini3Or4 = activeModel.includes('gemini-3') || activeModel.includes('gemini-4');
+        const testConfig: any = { maxOutputTokens: 20 };
+        if (isGemini3Or4) {
+          testConfig.thinkingConfig = { thinkingLevel: ThinkingLevel.LOW };
+        } else {
+          testConfig.temperature = 0.1;
+        }
+
         const testResp = await ai.models.generateContent({
           model: activeModel,
           contents: 'responda ok',
-          config: {
-            maxOutputTokens: 20,
-            temperature: 0.1,
-          },
+          config: testConfig,
         });
         testCallResult = {
           tested: true,
@@ -693,6 +724,8 @@ async function createServer() {
       } catch (testErr: any) {
         if (is404Error(testErr)) {
           markModelNotFound(activeModel);
+        } else {
+          markModelCongested(activeModel);
         }
         testCallResult = {
           tested: true,
@@ -781,33 +814,33 @@ async function createServer() {
       });
     }
 
-    const prompt = `Você é o especialista pedagógico da plataforma "ENEM Nota Max".
-Crie um mapa mental plano sobre o tema: "${cleanTema}".
+    const prompt = `Você é o especialista pedagógico da plataforma "ENEM Nota Máxima".
+Crie um mapa mental plano e objetivo sobre o tema: "${cleanTema}".
 
 ESTRUTURA OBRIGATÓRIA (LISTA PLANA DE NÓS):
 1. O primeiro nó DEVE ser a raiz: { "id": "root", "parentId": null, "label": "${cleanTema}", "summary": "Visão geral e contexto pedagógico no ENEM." }.
 2. Crie EXATAMENTE de 3 a 4 ramos principais conectados à raiz com "parentId": "root".
-3. Cada ramo principal deve se desdobrar em subtemas e detalhes, totalizando até 4 níveis de profundidade (raiz > ramo principal > subtema > detalhe).
-4. No MÁXIMO 30 nós no total em toda a lista.
+3. Cada ramo principal deve se desdobrar em 2 a 3 subtemas conceituais objetivos.
+4. Gere entre 10 e 15 nós no total em toda a lista para máxima clareza, velocidade e legibilidade.
 5. Cada nó deve conter:
    - "id": identificador único e conciso (ex: "root", "ramo_1", "ramo_1_1").
    - "parentId": ID do nó pai ao qual ele se conecta (use null ou "" apenas para o nó "root").
-   - "label": título do nó direto e conciso (máximo 4 a 6 palavras).
-   - "summary": explicação pedagógica clara e direta em 1 a 3 frases.
-   - "enemTips": dica prática de como o assunto cai no ENEM, pegadinha ou padrão de questão (coloque nos nós mais importantes).
-   - "videoQuery": termo de busca no YouTube para videoaula real (coloque em no máximo 1 a 2 nós mais importantes por ramo principal).
-6. Conteúdo 100% focado no ENEM, com explicações corretas, sem dados inventados. Quando não houver número exato, use tendências ("mais da metade").`;
+   - "label": título do nó direto e conciso (máximo 4 a 5 palavras).
+   - "summary": explicação pedagógica clara e direta em 1 frase.
+   - "enemTips": dica prática de como o assunto cai no ENEM, pegadinha ou padrão de questão (opcional).
+   - "videoQuery": termo de busca no YouTube para videoaula real (opcional).
+6. Conteúdo 100% focado no ENEM, com explicações corretas.`;
 
     const flatResponseSchema = {
       type: Type.ARRAY,
-      description: "Lista plana de nós do mapa mental com no máximo 30 nós e até 4 níveis de profundidade.",
+      description: "Lista plana de nós do mapa mental com 10 a 16 nós estruturados pedagogicamente.",
       items: {
         type: Type.OBJECT,
         properties: {
           id: { type: Type.STRING, description: "ID único do nó (ex: 'root', 'ramo_1')" },
           parentId: { type: Type.STRING, description: "ID do nó pai, ou null/vazio para a raiz" },
-          label: { type: Type.STRING, description: "Título do nó (máximo 4 a 6 palavras)" },
-          summary: { type: Type.STRING, description: "Explicação pedagógica clara e direta em 1 a 3 frases" },
+          label: { type: Type.STRING, description: "Título do nó (máximo 4 a 5 palavras)" },
+          summary: { type: Type.STRING, description: "Explicação pedagógica clara e direta em 1 frase" },
           enemTips: { type: Type.STRING, description: "Como cai no ENEM, pegadinha ou padrão de questão (opcional)" },
           videoQuery: { type: Type.STRING, description: "Termo de busca para videoaula real no YouTube (opcional)" }
         },
@@ -816,7 +849,7 @@ ESTRUTURA OBRIGATÓRIA (LISTA PLANA DE NÓS):
     };
 
     let lastError: any = null;
-    let lastModelAttempted = orderedCandidates[0] || 'gemini-3.7-flash';
+    let lastModelAttempted = orderedCandidates[0] || 'gemini-3.8-flash';
 
     for (const modelName of orderedCandidates) {
       lastModelAttempted = modelName;
@@ -835,9 +868,9 @@ ESTRUTURA OBRIGATÓRIA (LISTA PLANA DE NÓS):
           });
         }
 
-        // Per-attempt timeout capped by remaining overall time (max 18s)
+        // Per-attempt timeout capped by remaining overall time (max 14s)
         const remainingTime = TOTAL_TIMEOUT_MS - elapsed;
-        const attemptTimeoutMs = Math.min(remainingTime, 18000);
+        const attemptTimeoutMs = Math.min(remainingTime, 14000);
 
         try {
           const timeoutPromise = new Promise<never>((_, reject) => {
@@ -847,19 +880,15 @@ ESTRUTURA OBRIGATÓRIA (LISTA PLANA DE NÓS):
             if (typeof timer.unref === 'function') timer.unref();
           });
 
-          // Low thinking level for speed and broad model compatibility
-          const thinkingLevel = ThinkingLevel.LOW;
+          const genConfig: any = {
+            responseMimeType: 'application/json',
+            responseSchema: flatResponseSchema,
+          };
 
           const generatePromise = ai.models.generateContent({
             model: modelName,
             contents: prompt,
-            config: {
-              responseMimeType: 'application/json',
-              thinkingConfig: { thinkingLevel },
-              maxOutputTokens: 2500,
-              responseSchema: flatResponseSchema,
-              temperature: 0.2,
-            },
+            config: genConfig,
           });
 
           const response = await Promise.race([generatePromise, timeoutPromise]);
@@ -1079,7 +1108,7 @@ REGRAS OBRIGATÓRIAS:
     contentParts.push({ text: promptText });
 
     let lastError: any = null;
-    let lastModelAttempted = orderedCandidates[0] || 'gemini-3.7-flash';
+    let lastModelAttempted = orderedCandidates[0] || 'gemini-3.8-flash';
 
     for (const modelName of orderedCandidates) {
       lastModelAttempted = modelName;
@@ -1098,7 +1127,7 @@ REGRAS OBRIGATÓRIAS:
         }
 
         const remainingTime = TOTAL_TIMEOUT_MS - elapsed;
-        const attemptTimeoutMs = Math.min(remainingTime, 22000);
+        const attemptTimeoutMs = Math.min(remainingTime, 25000);
 
         try {
           const timeoutPromise = new Promise<never>((_, reject) => {
@@ -1108,16 +1137,20 @@ REGRAS OBRIGATÓRIAS:
             if (typeof timer.unref === 'function') timer.unref();
           });
 
-          const thinkingLevel = ThinkingLevel.LOW;
+          const isGemini3Or4 = modelName.includes('gemini-3') || modelName.includes('gemini-4');
+          const genConfig: any = {
+            maxOutputTokens: 2500,
+          };
+          if (isGemini3Or4) {
+            genConfig.thinkingConfig = { thinkingLevel: ThinkingLevel.LOW };
+          } else {
+            genConfig.temperature = 0.1;
+          }
 
           const generatePromise = ai.models.generateContent({
             model: modelName,
             contents: { parts: contentParts },
-            config: {
-              thinkingConfig: { thinkingLevel },
-              maxOutputTokens: 2500,
-              temperature: 0.1,
-            },
+            config: genConfig,
           });
 
           const response = await Promise.race([generatePromise, timeoutPromise]);
@@ -1355,7 +1388,7 @@ REGRAS DE PONTUAÇÃO E CRITÉRIOS OBRIGATÓRIOS:
           }
 
           const remainingTime = TOTAL_TIMEOUT_MS - elapsed;
-          const attemptTimeoutMs = Math.min(remainingTime, 20000);
+          const attemptTimeoutMs = Math.min(remainingTime, 25000);
 
           try {
             const timeoutPromise = new Promise<never>((_, reject) => {
@@ -1365,18 +1398,22 @@ REGRAS DE PONTUAÇÃO E CRITÉRIOS OBRIGATÓRIOS:
               if (typeof timer.unref === 'function') timer.unref();
             });
 
-            const thinkingLevel = ThinkingLevel.LOW;
+            const isGemini3Or4 = modelName.includes('gemini-3') || modelName.includes('gemini-4');
+            const genConfig: any = {
+              responseMimeType: 'application/json',
+              maxOutputTokens: 2500,
+              responseSchema: redacaoSchema,
+            };
+            if (isGemini3Or4) {
+              genConfig.thinkingConfig = { thinkingLevel: ThinkingLevel.LOW };
+            } else {
+              genConfig.temperature = temp;
+            }
 
             const generatePromise = ai.models.generateContent({
               model: modelName,
               contents: buildEvaluatorPrompt(evaluatorNum),
-              config: {
-                responseMimeType: 'application/json',
-                thinkingConfig: { thinkingLevel },
-                maxOutputTokens: 2500,
-                responseSchema: redacaoSchema,
-                temperature: temp,
-              },
+              config: genConfig,
             });
 
             const response = await Promise.race([generatePromise, timeoutPromise]);
@@ -1642,7 +1679,10 @@ REGRAS DE PONTUAÇÃO E CRITÉRIOS OBRIGATÓRIOS:
   } else {
     const { createServer: createViteServer } = await import('vite');
     const vite = await createViteServer({
-      server: { middlewareMode: true },
+      server: {
+        middlewareMode: true,
+        hmr: false,
+      },
       appType: 'spa',
     });
     app.use(vite.middlewares);

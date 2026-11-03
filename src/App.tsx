@@ -8,7 +8,9 @@ import { TimeTipsPage } from './pages/TimeTipsPage';
 import { MindMapsPage } from './pages/MindMapsPage';
 import { CitationsPage } from './pages/CitationsPage';
 import { CorretorPage } from './pages/CorretorPage';
+import { RetaFinalPage } from './pages/RetaFinalPage';
 import { NotFoundPage } from './pages/NotFoundPage';
+import { EnemNotificationModal } from './components/EnemNotificationModal';
 
 export default function App() {
   const [currentPath, setCurrentPath] = useState<string>(() => {
@@ -118,6 +120,11 @@ export default function App() {
       return <CorretorPage onNavigate={handleNavigate} />;
     }
 
+    // Route 8: Reta Final ENEM 2026
+    if (cleanPath === '/reta-final') {
+      return <RetaFinalPage onNavigate={handleNavigate} />;
+    }
+
     // Redirect legacy /citacoes to /repertorio
     if (cleanPath === '/citacoes') {
       if (typeof window !== 'undefined') {
@@ -139,6 +146,7 @@ export default function App() {
         {renderCurrentRoute()}
       </main>
       <Footer onNavigate={handleNavigate} />
+      <EnemNotificationModal onNavigate={handleNavigate} />
     </div>
   );
 }

@@ -12,7 +12,8 @@ import {
   CalendarCheck,
   Sun,
   Moon,
-  PenTool
+  PenTool,
+  Flame
 } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
@@ -26,6 +27,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
   const { theme, toggleTheme } = useTheme();
 
   const navLinks = [
+    { label: 'Reta Final', path: '/reta-final', icon: Flame },
     { label: 'Mural', path: '/', icon: Compass },
     { label: 'Vídeos', path: '/videos', icon: Video },
     { label: 'Corretor', path: '/corretor', icon: PenTool },
@@ -42,6 +44,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
 
   const isActive = (path: string) => {
     if (path === '/') return currentPath === '/';
+    if (path === '/reta-final') return currentPath.startsWith('/reta-final');
     if (path === '/#mural') return currentPath === '/' || currentPath.startsWith('/assunto');
     if (path === '/repertorio') return currentPath.startsWith('/repertorio') || currentPath.startsWith('/citacoes');
     return currentPath.startsWith(path);
@@ -70,13 +73,16 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
               <button
                 key={item.path}
                 onClick={() => handleLinkClick(item.path)}
-                className={`transition-colors py-1 relative whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded ${
+                className={`transition-colors py-1 relative whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded flex items-center gap-1 ${
                   isActive(item.path)
                     ? 'text-indigo-600 dark:text-indigo-400 font-semibold after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-indigo-600 dark:after:bg-indigo-400 after:rounded-full'
-                    : 'hover:text-slate-900 dark:hover:text-white'
+                    : item.path === '/reta-final'
+                      ? 'text-amber-600 dark:text-amber-400 font-bold hover:text-amber-700 dark:hover:text-amber-300'
+                      : 'hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
-                {item.label}
+                {item.path === '/reta-final' && <Flame className="w-3.5 h-3.5 text-amber-500" />}
+                <span>{item.label}</span>
               </button>
             ))}
           </nav>

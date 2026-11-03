@@ -11,6 +11,22 @@
     <meta name="twitter:card" content="summary_large_image" />
     <script>
       (function() {
+        // Ignorar erros de WebSocket/HMR gerados pelo @vite/client no sandbox do AI Studio
+        window.addEventListener('error', function(event) {
+          if (event && event.filename && event.filename.includes('@vite/client')) {
+            event.preventDefault?.();
+            event.stopImmediatePropagation?.();
+          }
+        }, true);
+        window.addEventListener('unhandledrejection', function(event) {
+          var reason = String(event && event.reason || '');
+          var stack = String(event && event.reason && event.reason.stack || '');
+          if (reason.indexOf('WebSocket') !== -1 || stack.indexOf('@vite/client') !== -1) {
+            event.preventDefault?.();
+            event.stopImmediatePropagation?.();
+          }
+        }, true);
+
         try {
           const stored = localStorage.getItem('theme');
           const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
