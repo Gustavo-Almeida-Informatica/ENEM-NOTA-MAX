@@ -80,7 +80,7 @@ export const TASK_D1_LING_INTERP: AdaptiveTask = {
   summary: 'Fixe a identificação da tese, tom do autor e distratores clássicos (extrapolação, redução e contradição) em textos jornalísticos e publicitários.',
   estimatedMinutes: 25,
   priority: 'essencial',
-  actionRoute: '/assunto/generos-textuais',
+  actionRoute: '/assunto/generos-e-tipos-textuais',
   actionLabel: 'Ver Resumo de Gêneros',
   category: 'linguagens',
 };

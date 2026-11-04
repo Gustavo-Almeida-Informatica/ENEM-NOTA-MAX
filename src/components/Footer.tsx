@@ -94,6 +94,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   Banco de Repertórios
                 </button>
               </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('/equipe')}
+                  className="hover:text-white transition-colors text-left text-purple-300 hover:text-purple-200 font-medium"
+                >
+                  Nossa Equipe
+                </button>
+              </li>
             </ul>
           </div>
 

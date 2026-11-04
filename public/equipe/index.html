@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#09051d">
+  <meta name="description" content="Conheça Gustavo Almeida e Max, os desenvolvedores do ENEM Nota Max.">
+  <title>Nossa equipe | ENEM Nota Max</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #08051b;
+      --panel: rgba(22, 13, 49, .88);
+      --purple: #8b35ff;
+      --purple-light: #bd83ff;
+      --yellow: #ffd52e;
+      --white: #f8f5ff;
+      --muted: #c8bfdc;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; min-height: 100vh; color: var(--white);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(ellipse at 12% 8%, rgba(117, 35, 255, .27), transparent 35rem),
+        radial-gradient(ellipse at 90% 55%, rgba(84, 24, 190, .2), transparent 34rem),
+        var(--bg);
+    }
+    a { color: inherit; }
+    .wrap { width: min(1100px, calc(100% - 36px)); margin: auto; }
+    header { padding: 26px 0; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 900; letter-spacing: -.04em; }
+    .brand-mark {
+      display: grid; place-items: center; width: 44px; height: 44px; border-radius: 14px;
+      background: linear-gradient(135deg, #a100ff, #5420d8); box-shadow: 0 0 25px #852bff70;
+      font-size: 23px;
+    }
+    .brand span:last-child { font-size: 20px; }
+    .hero { text-align: center; padding: 62px 0 42px; }
+    .eyebrow {
+      display: inline-block; padding: 8px 14px; border: 1px solid #8d42ff88;
+      border-radius: 999px; color: var(--purple-light); background: #451b7a38;
+      font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+    }
+    h1 { margin: 20px 0 14px; font-size: clamp(38px, 7vw, 68px); line-height: .98; letter-spacing: -.055em; }
+    h1 span { color: var(--purple-light); text-shadow: 0 0 28px #8b35ff66; }
+    .intro { max-width: 690px; margin: auto; color: var(--muted); font-size: clamp(16px, 2vw, 19px); line-height: 1.7; }
+    .team { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; padding: 26px 0 54px; }
+    .person {
+      position: relative; overflow: hidden; padding: 30px; text-align: center;
+      border: 1px solid #8c45ff75; border-radius: 26px;
+      background: linear-gradient(145deg, rgba(36, 19, 73, .96), var(--panel));
+      box-shadow: 0 18px 55px #0005, inset 0 0 35px #8b35ff0c;
+    }
+    .person:before { content: ""; position: absolute; width: 190px; height: 190px; top: -120px; left: calc(50% - 95px); background: #8b35ff55; filter: blur(45px); }
+    .avatar {
+      position: relative; width: 164px; height: 164px; margin: 0 auto 22px; padding: 5px;
+      border-radius: 50%; background: linear-gradient(135deg, var(--purple-light), #671dff, var(--yellow));
+      box-shadow: 0 0 30px #8b35ff65;
+    }
+    .avatar img { display: block; width: 100%; height: 100%; border-radius: 50%; object-fit: cover; object-position: center; border: 3px solid #140b2c; }
+    .person h2 { margin: 0 0 7px; font-size: 27px; letter-spacing: -.03em; }
+    .role { color: var(--yellow); font-weight: 800; font-size: 13px; text-transform: uppercase; letter-spacing: .1em; }
+    .person p { margin: 17px auto 20px; max-width: 330px; color: var(--muted); line-height: 1.6; }
+    .social {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      padding: 11px 17px; border: 1px solid #a86cff; border-radius: 999px;
+      color: white; text-decoration: none; font-weight: 750; transition: .2s ease;
+    }
+    .social:hover { background: #7d2ee8; transform: translateY(-2px); }
+    .mission { margin: 4px 0 42px; padding: 32px; border: 1px solid #6e3bbd88; border-radius: 24px; text-align: center; background: #160d30bd; }
+    .mission h2 { margin: 0 0 12px; font-size: clamp(24px, 4vw, 34px); }
+    .mission p { max-width: 720px; margin: auto; color: var(--muted); line-height: 1.7; }
+    .actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 13px; margin-top: 24px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 14px 21px; border-radius: 13px; text-decoration: none; font-weight: 850; transition: .2s ease; }
+    .button.primary { color: #180c2c; background: var(--yellow); box-shadow: 0 8px 28px #ffd52e25; }
+    .button.secondary { border: 1px solid #a86cff; background: #54208a55; }
+    .button:hover { transform: translateY(-2px); filter: brightness(1.08); }
+    footer { padding: 24px 0 36px; color: #9589ad; text-align: center; font-size: 13px; }
+    footer strong { color: var(--purple-light); }
+    @media (max-width: 700px) {
+      .hero { padding-top: 42px; }
+      .team { grid-template-columns: 1fr; }
+      .person { padding: 27px 20px; }
+      .avatar { width: 145px; height: 145px; }
+      .mission { padding: 26px 18px; }
+      .button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <a class="brand" href="https://enem-nota-max.ai.studio/" aria-label="ENEM Nota Max - página inicial">
+      <span class="brand-mark">M</span>
+      <span>ENEM <span style="color:#bd83ff">Nota Max</span></span>
+    </a>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <span class="eyebrow">Por trás da plataforma</span>
+      <h1>Quem faz o <span>ENEM Nota Max?</span></h1>
+      <p class="intro">Conheça os dois desenvolvedores por trás do projeto. Nosso objetivo é aproximar tecnologia e educação e oferecer ferramentas que apoiem a preparação dos estudantes para o ENEM.</p>
+    </section>
+
+    <section class="team" aria-label="Equipe de desenvolvimento">
+      <article class="person">
+        <div class="avatar">
+          <img src="assets/gustavo-almeida.jpg" alt="Foto de perfil de Gustavo Almeida">
+        </div>
+        <h2>Gustavo Almeida</h2>
+        <div class="role">Desenvolvedor</div>
+        <p>Participa do desenvolvimento do ENEM Nota Max, trabalhando para transformar ideias em recursos que apoiem a jornada dos estudantes.</p>
+        <a class="social" href="https://www.instagram.com/gustavo.almeida.ofc/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Gustavo Almeida">
+          <span aria-hidden="true">◎</span> @gustavo.almeida.ofc
+        </a>
+      </article>
+
+      <article class="person">
+        <div class="avatar">
+          <img src="assets/max.jpg" alt="Foto de perfil de Max, um gato preto com olhos azuis">
+        </div>
+        <h2>Max</h2>
+        <div class="role">Desenvolvedor</div>
+        <p>Faz parte da equipe responsável pelo desenvolvimento e evolução do ENEM Nota Max.</p>
+        <a class="social" href="https://www.instagram.com/max_silveira_2023/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Max">
+          <span aria-hidden="true">◎</span> @max_silveira_2023
+        </a>
+      </article>
+    </section>
+
+    <section class="mission">
+      <h2>Tecnologia a serviço da educação.</h2>
+      <p>O ENEM Nota Max reúne recursos para ajudar estudantes a organizar os estudos, revisar conteúdos e se preparar com mais clareza para o exame.</p>
+      <div class="actions">
+        <a class="button primary" href="https://enem-nota-max.ai.studio/" target="_blank" rel="noopener noreferrer">Acessar o site ↗</a>
+        <a class="button secondary" href="https://github.com/Gustavo-Almeida-Informatica/ENEM-NOTA-MAX" target="_blank" rel="noopener noreferrer">Ver repositório no GitHub ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <strong>ENEM Nota Max</strong> · Estude • Planeje • Conquiste
+  </footer>
+</body>
+</html>

@@ -9,6 +9,7 @@ import { MindMapsPage } from './pages/MindMapsPage';
 import { CitationsPage } from './pages/CitationsPage';
 import { CorretorPage } from './pages/CorretorPage';
 import { RetaFinalPage } from './pages/RetaFinalPage';
+import { EquipePage } from './pages/EquipePage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { EnemNotificationModal } from './components/EnemNotificationModal';
 
@@ -123,6 +124,11 @@ export default function App() {
     // Route 8: Reta Final ENEM 2026
     if (cleanPath === '/reta-final') {
       return <RetaFinalPage onNavigate={handleNavigate} />;
+    }
+
+    // Route 9: Equipe (Nossa Equipe)
+    if (cleanPath === '/equipe') {
+      return <EquipePage onNavigate={handleNavigate} />;
     }
 
     // Redirect legacy /citacoes to /repertorio

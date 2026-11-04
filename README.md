@@ -1,73 +1,73 @@
 # 🎯 ENEM Nota Max
 
-Plataforma web de estudos para o **ENEM**, criada para ajudar estudantes a aprender com mais foco e menos tempo perdido. Resumos diretos, mapas mentais, videoaulas e estratégias de prova em um só lugar, com design original e uso confortável no celular.
+> **"Estude melhor, perca menos tempo, mire na nota máxima."**
 
-## ✨ Funcionalidades
+Plataforma educacional completa, moderna e gratuita desenvolvida para apoiar estudantes de todo o Brasil na preparação estratégica para o **Exame Nacional do Ensino Médio (ENEM)**.
 
-- **Mural de assuntos:** cerca de 60 temas organizados nas 5 áreas do ENEM (Linguagens, Matemática, Ciências Humanas, Ciências da Natureza e Redação).
-- **Resumos objetivos:** texto curto e direto, com pontos-chave e "o que mais cai na prova".
-- **Mapas mentais interativos:** diagramas por tema (ex.: Meio Ambiente) com zoom, arrastar e modo lista.
-- **Videoaulas:** biblioteca de vídeos educativos sobre o ENEM, com filtro por área.
-- **Dicas de tempo e planejador:** estratégias para reservar o tempo na prova e nos estudos, com um planejador de horas por área.
-- **Banco de repertório para a redação:** citações, leis, obras e dados, com o eixo temático em que cada um se encaixa.
+---
 
-## 🚧 Em desenvolvimento
+## 🌐 Acesse a Plataforma Online
 
-- Mapas mentais gerados por IA a partir de um tema digitado pelo usuário, com blocos em vários níveis, explicação em cada bloco e vídeo nos blocos mais complexos.
-- Videoaulas reais carregadas pela YouTube Data API.
-- Ampliação do banco de repertórios.
+🔗 **Site Oficial:** [https://enem-nota-max.ai.studio/](https://enem-nota-max.ai.studio/)  
+📦 **Repositório GitHub:** [https://github.com/Gustavo-Almeida-Informatica/ENEM-NOTA-MAX](https://github.com/Gustavo-Almeida-Informatica/ENEM-NOTA-MAX)
 
-## 🛠️ Tecnologias
+---
 
-| Camada | Tecnologia |
-|---|---|
-| Interface | React 19, TypeScript |
-| Estilo | Tailwind CSS 4, Motion, Lucide Icons |
-| Build | Vite |
-| Servidor | Express |
-| IA | Google Gemini (`@google/genai`) |
+## 💡 Propósito do Projeto
 
-## 📁 Estrutura
+O **ENEM Nota Max** nasceu da missão de **aproximar tecnologia de ponta e educação**, democratizando o acesso a métodos eficazes de aprendizagem e revisão para o ENEM.
 
-```
-src/
-├── components/   # Navbar, Footer, MindMapViewer, VideoEmbed, TimePlanner
-├── pages/        # Home, Vídeos, Assunto, Dicas, Mapas mentais, Citações
-├── data/         # Assuntos por área, mapas mentais, vídeos, citações, dicas
-└── types/        # Tipos TypeScript
-```
+Muitos estudantes enfrentam sobrecarga de conteúdos extensos, falta de direcionamento prático e ansiedade com a gestão do tempo na prova. O propósito do ENEM Nota Max é transformar essa realidade:
 
-## 🚀 Como rodar localmente
+- **Foco no Essencial:** Síntese precisa dos 60 assuntos historicamente mais recorrentes na prova, alinhados à Matriz de Referência do INEP e à lógica de pontuação da Teoria de Resposta ao Item (TRI).
+- **Aprendizado Visual e Ativo:** Mapas mentais interativos que facilitam a fixação de conceitos e relações interdisciplinares.
+- **Preparação Adaptativa:** Acompanhamento dinâmico que calcula o tempo restante até a prova e gera cronogramas sob medida para a rotina de cada aluno.
+- **Feedback Construtivo na Redação:** Correção detalhada baseada nas 5 competências oficiais do exame para alavancar a nota rumo aos 1000 pontos.
 
-**Pré-requisito:** Node.js
+---
 
-```bash
-# 1. Instale as dependências
-npm install
+## ✨ Principais Recursos
 
-# 2. Configure as variáveis de ambiente
-cp .env.example .env.local
-# edite o .env.local e preencha GEMINI_API_KEY
+- 🧭 **Mural dos 60 Assuntos Mais Cobrados:** Conteúdos objetivos divididos nas 5 áreas do conhecimento: *Linguagens e Códigos*, *Matemática*, *Ciências Humanas*, *Ciências da Natureza* e *Redação*.
+- 🔥 **Central da Reta Final ENEM 2026:** Planejamento adaptativo que ajusta blocos de estudos conforme a proximidade do exame, com simulados rápidos, orientações estratégicas, checklist oficial e acervo de consulta.
+- 🧠 **Mapas Mentais Interativos:** Visualizador dinâmico de conexões conceituais com zoom, navegação panorâmica e gerador inteligente de mapas por tema.
+- ✍️ **Corretor de Redação com Inteligência Artificial:** Avaliação profunda de dissertações-argumentativas com notas por competência (C1 a C5), análise de repertório sociocultural e proposta de intervenção.
+- ⏱️ **Gestão de Tempo & Dicas de Prova:** Métodos de resolução rápida (meta dos 3 minutos por questão) e calculadora de planejamento semanal de estudos.
+- 📚 **Banco de Repertórios Socioculturais:** Citações filosóficas, legislações, dados estatísticos e obras literárias catalogados por eixos temáticos para a redação nota 1000.
+- 🎥 **Biblioteca Curada de Videoaulas:** Conteúdos audiovisuais selecionados dos melhores canais educacionais para reforço visual e auditivo.
+- 🌓 **Design Responsivo com Modo Escuro:** Interface fluida, rápida e adaptada para celulares, tablets e computadores.
 
-# 3. Inicie o projeto
-npm run dev
-```
+---
 
-O site abre em `http://localhost:3000`.
+## 👥 Quem Faz o ENEM Nota Max
 
-## 🔐 Variáveis de ambiente
+Conheça os desenvolvedores dedicados à concepção, construção e evolução contínua da plataforma:
 
-| Variável | Uso |
-|---|---|
-| `GEMINI_API_KEY` | Chave da API do Gemini (somente no servidor) |
-| `YOUTUBE_API_KEY` | Chave da YouTube Data API (vídeos reais) |
+| Desenvolvedor | Papel | Instagram |
+|---|---|---|
+| **Gustavo Almeida** | Desenvolvedor | [@gustavo.almeida.ofc](https://www.instagram.com/gustavo.almeida.ofc/) |
+| **Max** | Desenvolvedor | [@max_silveira_2023](https://www.instagram.com/max_silveira_2023/) |
 
-> Nunca envie suas chaves para o GitHub. Mantenha o `.env.local` no `.gitignore`.
+> *Acompanhe as atualizações, envie feedbacks e conheça os bastidores do projeto através dos perfis no Instagram.*
 
-## 🤝 Contribuindo
+---
 
-Sugestões e melhorias são bem-vindas. Abra uma *issue* ou envie um *pull request*.
+## 🛠️ Tecnologias Utilizadas
 
-## 📄 Licença
+- **Frontend:** React 19, TypeScript, Tailwind CSS 4, Motion, Lucide Icons
+- **Backend:** Node.js, Express
+- **Inteligência Artificial:** Google Gemini API (`@google/genai`)
+- **Ferramentas de Build:** Vite
 
-Defina a licença do projeto (ex.: MIT).
+---
+
+## 🤝 Comunidade e Contribuições
+
+Contribuições, sugestões de novos temas e melhorias são sempre bem-vindas! Sinta-se à vontade para abrir uma *issue* ou enviar um *pull request* no repositório do projeto.
+
+---
+
+<p align="center">
+  <strong>ENEM Nota Max</strong> · <em>Estude • Planeje • Conquiste</em><br>
+  Feito com dedicação para estudantes de todo o Brasil que miram a nota máxima.
+</p>

@@ -13,7 +13,8 @@ import {
   Sun,
   Moon,
   PenTool,
-  Flame
+  Flame,
+  Users
 } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
@@ -35,6 +36,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
     { label: 'Dicas de tempo', path: '/dicas', icon: Clock },
     { label: 'Mapas mentais', path: '/mapas', icon: Network },
     { label: 'Repertório', path: '/repertorio', icon: BookOpen },
+    { label: 'Equipe', path: '/equipe', icon: Users },
   ];
 
   const handleLinkClick = (path: string) => {
@@ -45,6 +47,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
   const isActive = (path: string) => {
     if (path === '/') return currentPath === '/';
     if (path === '/reta-final') return currentPath.startsWith('/reta-final');
+    if (path === '/equipe') return currentPath.startsWith('/equipe');
     if (path === '/#mural') return currentPath === '/' || currentPath.startsWith('/assunto');
     if (path === '/repertorio') return currentPath.startsWith('/repertorio') || currentPath.startsWith('/citacoes');
     return currentPath.startsWith(path);
@@ -68,7 +71,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
           </button>
 
           {/* Zone 2: Navigation Links (Desktop) */}
-          <nav className="hidden lg:flex items-center gap-7 text-sm font-medium text-slate-600 dark:text-slate-300">
+          <nav className="hidden lg:flex items-center gap-5 xl:gap-6 text-sm font-medium text-slate-600 dark:text-slate-300">
             {navLinks.map((item) => (
               <button
                 key={item.path}
