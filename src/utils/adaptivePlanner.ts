@@ -170,12 +170,12 @@ export const TASK_D1_SIMULADO: AdaptiveTask = {
 
 export const TASK_D1_CHECKLIST_FINAL: AdaptiveTask = {
   id: 'task-d1-checklist-final',
-  title: 'Checklist Físico & Organização para o 1º Domingo',
-  discipline: 'Organização da Prova',
-  summary: 'Separe 3 canetas pretas de tubo transparente, documento oficial original com foto, garrafa de água transparente sem rótulo e programe o trajeto.',
+  title: 'Organização da Prova',
+  discipline: 'Checklist Físico, Mental e Organização para o ENEM',
+  summary: 'Prepare-se para o dia da prova! Confira o que levar, como organizar sua alimentação, descansar corretamente, cuidar do corpo e evitar imprevistos antes de entrar no local de aplicação.',
   estimatedMinutes: 15,
   priority: 'essencial',
-  actionLabel: 'Ver Orientações Oficiais',
+  actionLabel: 'Ver Guia de Preparação',
   category: 'checklist',
 };
 
@@ -254,23 +254,23 @@ export const TASK_D2_QUI_ORGANICA: AdaptiveTask = {
 
 export const TASK_D2_SIMULADO: AdaptiveTask = {
   id: 'task-d2-simulado',
-  title: 'Simulado Rápido do 2º Dia (Questões Autorais)',
+  title: 'Simulado Rápido de Treinamento (Questões Autorais)',
   discipline: 'Simulado Integrado',
-  summary: 'Resolva questões cronometradas de Matemática e Ciências da Natureza para calibrar velocidade de raciocínio.',
+  summary: 'Treine interpretação e eliminação de distratores nas questões autorais cronometradas da Central da Reta Final.',
   estimatedMinutes: 25,
   priority: 'alta',
-  actionLabel: 'Fazer Simulado do 2º Dia',
+  actionLabel: 'Fazer Simulado Abaixo',
   category: 'simulado',
 };
 
 export const TASK_D2_CHECKLIST_FINAL: AdaptiveTask = {
   id: 'task-d2-checklist-final',
-  title: 'Checklist Físico & Preparação do 2º Domingo',
-  discipline: 'Organização da Prova',
-  summary: 'Reponha as canetas pretas transparentes, confira o local e horário de fechamento (13h) e descanse a mente antes da prova de exatas.',
+  title: 'Organização da Prova',
+  discipline: 'Checklist Físico, Mental e Organização para o ENEM',
+  summary: 'Prepare-se para o dia da prova! Confira o que levar, como organizar sua alimentação, descansar corretamente, cuidar do corpo e evitar imprevistos antes de entrar no local de aplicação.',
   estimatedMinutes: 15,
   priority: 'essencial',
-  actionLabel: 'Ver Orientações Oficiais',
+  actionLabel: 'Ver Guia de Preparação',
   category: 'checklist',
 };
 

@@ -14,6 +14,7 @@ export interface EnemCountdownInfo {
   isDiaDeProva: boolean;
   provaNome: string;
   disciplinas: string[];
+  notificationId: string;
 }
 
 // Datas oficiais do ENEM 2026
@@ -133,6 +134,7 @@ export function getEnem2026Info(dataSimulada?: string): EnemCountdownInfo {
       isDiaDeProva: isHoje,
       provaNome: '1º Dia do ENEM (08/11)',
       disciplinas: ['Redação Nota 1000', 'Linguagens e Códigos', 'Ciências Humanas'],
+      notificationId: isHoje ? 'notif_enem_2026_etapa1_hoje' : `notif_enem_2026_etapa1_${dias}dias`,
     };
   }
 
@@ -171,6 +173,7 @@ export function getEnem2026Info(dataSimulada?: string): EnemCountdownInfo {
       isDiaDeProva: isHoje,
       provaNome: '2º Dia do ENEM (15/11)',
       disciplinas: ['Matemática e suas Tecnologias', 'Física, Química e Biologia'],
+      notificationId: isHoje ? 'notif_enem_2026_etapa2_hoje' : `notif_enem_2026_etapa2_${dias}dias`,
     };
   }
 
@@ -188,5 +191,6 @@ export function getEnem2026Info(dataSimulada?: string): EnemCountdownInfo {
     isDiaDeProva: false,
     provaNome: 'ENEM 2026 Concluído',
     disciplinas: [],
+    notificationId: 'notif_enem_2026_encerrado',
   };
 }

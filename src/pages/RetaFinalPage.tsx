@@ -48,6 +48,8 @@ import {
   ContentTopicItem,
   SimuladoQuestion
 } from '../data/retaFinalData';
+import { SimuladoIntegradoView } from '../components/SimuladoIntegradoView';
+import { GuiaOrganizacaoProva } from '../components/GuiaOrganizacaoProva';
 
 interface RetaFinalPageProps {
   onNavigate: (path: string) => void;
@@ -935,12 +937,23 @@ export const RetaFinalPage: React.FC<RetaFinalPageProps> = ({ onNavigate }) => {
                             <button
                               type="button"
                               onClick={() => {
+                                if (task.category === 'checklist' || task.actionLabel === 'Ver Guia de Preparação') {
+                                  const guiaEl = document.getElementById('guia-organizacao-prova');
+                                  if (guiaEl) {
+                                    guiaEl.scrollIntoView({ behavior: 'smooth' });
+                                    return;
+                                  }
+                                }
                                 if (activeExamStage === 'dia1') setActiveTabDia1('simulado');
                                 else setActiveTabDia2('simulado');
                                 const simEl = document.getElementById('secao-simulado');
                                 if (simEl) simEl.scrollIntoView({ behavior: 'smooth' });
                               }}
-                              className="inline-flex items-center gap-1 text-xs font-bold text-amber-600 dark:text-amber-400 hover:underline py-1 px-2 rounded-lg bg-amber-50 dark:bg-amber-950/60 border border-amber-200/60 dark:border-amber-800/60 cursor-pointer"
+                              className={`inline-flex items-center gap-1 text-xs font-bold py-1 px-2.5 rounded-lg border transition-all cursor-pointer ${
+                                task.category === 'checklist'
+                                  ? 'text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 border-emerald-200/80 dark:border-emerald-800/60 hover:bg-emerald-100 dark:hover:bg-emerald-900/60'
+                                  : 'text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/60 border-amber-200/60 dark:border-amber-800/60 hover:underline'
+                              }`}
                             >
                               <span>{task.actionLabel}</span>
                               <ChevronRight className="w-3 h-3" />
@@ -956,6 +969,9 @@ export const RetaFinalPage: React.FC<RetaFinalPageProps> = ({ onNavigate }) => {
           </div>
         )}
       </section>
+
+      {/* GUIA DE PREPARAÇÃO — ORGANIZAÇÃO DA PROVA (CHECKLIST FÍSICO, MENTAL E LOGÍSTICA) */}
+      <GuiaOrganizacaoProva />
 
       {/* SEÇÃO DE CONSULTA HISTÓRICA DO ACERVO PEDAGÓGICO (QUANDO A CAMPANHA ESTIVER ENCERRADA) */}
       {plan.isEncerrado && (
@@ -1100,7 +1116,7 @@ export const RetaFinalPage: React.FC<RetaFinalPageProps> = ({ onNavigate }) => {
           {activeTabDia1 === 'simulado' && (
             <div id="secao-simulado" className="space-y-6">
               {renderSimuladoSection(
-                currentSimuladoQuestions, 
+                'dia1', 
                 userAnswers, 
                 handleSelectAnswer, 
                 resetSimulado,
@@ -1181,7 +1197,7 @@ export const RetaFinalPage: React.FC<RetaFinalPageProps> = ({ onNavigate }) => {
           {activeTabDia2 === 'simulado' && (
             <div id="secao-simulado" className="space-y-6">
               {renderSimuladoSection(
-                currentSimuladoQuestions, 
+                'dia2', 
                 userAnswers, 
                 handleSelectAnswer, 
                 resetSimulado,
@@ -1430,338 +1446,23 @@ function renderContentCard(
   );
 }
 
-// Seção de Simulado Interativo com 5 Alternativas, Correção Automática e Modo de Consulta Histórica (Somente Leitura)
+// // Seção de Simulado Integrado Ampliado (25 min, 10 Questões Autorais, Cronômetro, Relatório Pedagógico e Distratores)
 function renderSimuladoSection(
-  questions: SimuladoQuestion[],
+  stage: 'dia1' | 'dia2' | 'geral',
   userAnswers: Record<string, 'A' | 'B' | 'C' | 'D' | 'E'>,
   handleSelectAnswer: (questionId: string, option: 'A' | 'B' | 'C' | 'D' | 'E') => void,
   resetSimulado: () => void,
   simuladoLabel: string,
   readOnly: boolean = false
 ) {
-  const answeredCount = questions.filter(q => userAnswers[q.id] !== undefined).length;
-  const correctCount = questions.filter(q => userAnswers[q.id] === q.correctAnswer).length;
-
   return (
-    <div className="space-y-6">
-      {/* AVISO DO MODO DE CONSULTA HISTÓRICA (SOMENTE LEITURA) */}
-      {readOnly && (
-        <div className="p-4 sm:p-5 rounded-2xl bg-amber-500/10 dark:bg-amber-950/30 border border-amber-300 dark:border-amber-800 text-amber-950 dark:text-amber-200 flex items-start gap-3 animate-fade-in text-xs sm:text-sm shadow-xs">
-          <ShieldCheck className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
-          <div className="space-y-1">
-            <span className="font-black uppercase tracking-wider text-[11px] px-2.5 py-0.5 rounded bg-amber-200/70 dark:bg-amber-900/70 text-amber-950 dark:text-amber-200 inline-block border border-amber-300 dark:border-amber-700">
-              CONSULTA HISTÓRICA — SOMENTE LEITURA
-            </span>
-            <p className="leading-relaxed">
-              Este é o acervo de consulta do ENEM 2026. As provas já foram aplicadas. Aqui você pode revisar questões, gabaritos e explicações, mas não pode alterar suas respostas anteriores.
-            </p>
-          </div>
-        </div>
-      )}
-
-      {/* Cabeçalho do Simulado */}
-      <div className="p-5 rounded-2xl bg-gradient-to-r from-indigo-900 to-slate-900 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div>
-          <span className="text-xs font-bold uppercase tracking-wider text-amber-300 block mb-1">
-            {readOnly ? `Acervo Histórico e Gabarito — ${simuladoLabel}` : `Simulado de Treinamento Rápido — ${simuladoLabel}`}
-          </span>
-          <h3 className="text-lg sm:text-xl font-black">
-            {readOnly ? 'Revisão das Questões com Gabarito e Justificativas Didáticas' : 'Questões de Múltipla Escolha com Correção Imediata'}
-          </h3>
-          <p className="text-xs text-indigo-200 mt-1">
-            {readOnly
-              ? 'Consulte as justificativas pedagógicas detalhadas, veja a resposta correta do simulado e revise suas respostas salvas com segurança.'
-              : 'Cinco alternativas (A a E), correção automática e explicação didática passo a passo para cada resposta.'}
-          </p>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <div className="bg-white/10 px-3.5 py-2 rounded-xl text-center border border-white/15">
-            <span className="text-xs uppercase text-slate-300 block">{readOnly ? 'Acertos Salvos' : 'Acertos'}</span>
-            <span className="text-lg font-black text-amber-300">{correctCount} / {questions.length}</span>
-          </div>
-
-          {/* O botão "Refazer" é estritamente ocultado no Modo de Consulta Histórica */}
-          {!readOnly && answeredCount > 0 && (
-            <button
-              onClick={resetSimulado}
-              className="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold text-white transition-colors flex items-center gap-1 cursor-pointer"
-              title="Refazer simulado"
-            >
-              <RotateCcw className="w-3.5 h-3.5" />
-              <span>Refazer</span>
-            </button>
-          )}
-        </div>
-      </div>
-
-      {/* Lista de Questões */}
-      <div className="space-y-6">
-        {questions.map((q, idx) => {
-          const selectedOption = userAnswers[q.id];
-          const isAnswered = selectedOption !== undefined;
-          const hasValidAnswerKey = !!q.correctAnswer && ['A', 'B', 'C', 'D', 'E'].includes(q.correctAnswer as any);
-          const isCorrect = isAnswered && hasValidAnswerKey && selectedOption === q.correctAnswer;
-
-          return (
-            <div 
-              key={q.id}
-              className={`p-5 sm:p-7 rounded-2xl border transition-all ${
-                isAnswered 
-                  ? isCorrect 
-                    ? 'border-emerald-300 dark:border-emerald-800/80 bg-emerald-50/20 dark:bg-emerald-950/10'
-                    : 'border-rose-300 dark:border-rose-800/80 bg-rose-50/20 dark:bg-rose-950/10'
-                  : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm'
-              }`}
-            >
-              {/* Identificação da Questão e Status da Resposta */}
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-3">
-                <div className="flex items-center gap-2 flex-wrap">
-                  <span className="text-xs font-black uppercase tracking-wider px-2.5 py-1 rounded-md bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300">
-                    Questão {idx + 1} • {q.discipline}
-                  </span>
-
-                  {readOnly && (
-                    !isAnswered ? (
-                      <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">
-                        Questão não respondida anteriormente
-                      </span>
-                    ) : isCorrect ? (
-                      <span className="text-[11px] font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-950/80 px-2 py-0.5 rounded flex items-center gap-1 border border-emerald-300 dark:border-emerald-800/60">
-                        <CheckCircle2 className="w-3 h-3 text-emerald-600" />
-                        Sua resposta: correta
-                      </span>
-                    ) : (
-                      <span className="text-[11px] font-bold text-rose-700 dark:text-rose-300 bg-rose-100 dark:bg-rose-950/80 px-2 py-0.5 rounded flex items-center gap-1 border border-rose-300 dark:border-rose-800/60">
-                        <AlertCircle className="w-3 h-3 text-rose-600" />
-                        Sua resposta: incorreta
-                      </span>
-                    )
-                  )}
-                </div>
-
-                <span className="text-[11px] font-medium text-slate-400 italic">
-                  {q.sourceLabel}
-                </span>
-              </div>
-
-              {/* Texto de Apoio / Contexto */}
-              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-serif italic mb-4">
-                "{q.textContext}"
-              </div>
-
-              {/* Comando da Questão */}
-              <p className="font-bold text-slate-900 dark:text-white text-sm sm:text-base leading-snug mb-4">
-                {q.questionPrompt}
-              </p>
-
-              {/* 5 Alternativas (A, B, C, D, E) */}
-              <div className="space-y-2.5">
-                {q.options.map((opt) => {
-                  const isThisCorrect = hasValidAnswerKey && opt.letter === q.correctAnswer;
-                  const isSelectedByUser = selectedOption === opt.letter;
-
-                  // RENDERIZAÇÃO EM MODO HISTÓRICO (SOMENTE LEITURA — ZERO INTERAÇÃO OU MUTAÇÃO)
-                  if (readOnly) {
-                    let optStyle = 'bg-slate-50/40 dark:bg-slate-900/40 border-slate-200/80 dark:border-slate-800 text-slate-500 dark:text-slate-400 opacity-75';
-                    let letterStyle = 'bg-slate-200/70 dark:bg-slate-800 text-slate-600 dark:text-slate-400';
-
-                    if (isThisCorrect) {
-                      optStyle = 'bg-emerald-50 dark:bg-emerald-950/50 border-emerald-500 text-emerald-950 dark:text-emerald-100 font-bold shadow-xs';
-                      letterStyle = 'bg-emerald-600 text-white';
-                    } else if (isSelectedByUser && !isThisCorrect) {
-                      optStyle = 'bg-rose-50 dark:bg-rose-950/50 border-rose-400 text-rose-950 dark:text-rose-100 font-medium';
-                      letterStyle = 'bg-rose-600 text-white';
-                    }
-
-                    return (
-                      <div
-                        key={opt.letter}
-                        className={`w-full text-left p-3.5 rounded-xl border transition-all flex items-start justify-between gap-3 select-none text-xs sm:text-sm cursor-default ${optStyle}`}
-                      >
-                        <div className="flex items-start gap-3">
-                          <span className={`w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 ${letterStyle}`}>
-                            {opt.letter}
-                          </span>
-                          <span className="leading-relaxed pt-0.5">{opt.text}</span>
-                        </div>
-
-                        {/* Etiquetas explícitas de Gabarito e Resposta do Estudante */}
-                        <div className="shrink-0 flex items-center gap-1.5 pt-0.5">
-                          {isThisCorrect && isSelectedByUser && (
-                            <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-600 text-white shadow-xs">
-                              Resposta correta • Sua escolha
-                            </span>
-                          )}
-                          {isThisCorrect && !isSelectedByUser && (
-                            <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border border-emerald-400/50">
-                              Gabarito da Questão
-                            </span>
-                          )}
-                          {!isThisCorrect && isSelectedByUser && (
-                            <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300 border border-rose-300 dark:border-rose-800">
-                              Sua Resposta
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  }
-
-                  // RENDERIZAÇÃO EM MODO DE PREPARAÇÃO (INTERATIVO)
-                  let optionStyle = 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800';
-
-                  if (isAnswered) {
-                    if (isThisCorrect) {
-                      optionStyle = 'bg-emerald-100 dark:bg-emerald-950/80 border-emerald-500 text-emerald-950 dark:text-emerald-100 font-bold';
-                    } else if (isSelectedByUser && !isThisCorrect) {
-                      optionStyle = 'bg-rose-100 dark:bg-rose-950/80 border-rose-500 text-rose-950 dark:text-rose-100 font-medium';
-                    } else {
-                      optionStyle = 'bg-slate-50 dark:bg-slate-900/40 border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 opacity-60';
-                    }
-                  }
-
-                  return (
-                    <button
-                      key={opt.letter}
-                      type="button"
-                      onClick={() => handleSelectAnswer(q.id, opt.letter)}
-                      className={`w-full text-left p-3.5 rounded-xl border transition-all flex items-start gap-3 select-none text-xs sm:text-sm cursor-pointer ${optionStyle}`}
-                    >
-                      <span className={`w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 ${
-                        isAnswered && isThisCorrect 
-                          ? 'bg-emerald-600 text-white' 
-                          : isAnswered && isSelectedByUser && !isThisCorrect
-                            ? 'bg-rose-600 text-white'
-                            : isSelectedByUser
-                              ? 'bg-indigo-600 text-white'
-                              : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
-                      }`}>
-                        {opt.letter}
-                      </span>
-                      <span className="leading-relaxed pt-0.5">{opt.text}</span>
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Explicação da Resposta e Justificativa Pedagógica */}
-              {readOnly ? (
-                // No modo histórico, o gabarito e a explicação são SEMPRE exibidos para todas as questões
-                <div className={`mt-5 p-4 rounded-xl border animate-fade-in ${
-                  isAnswered && isCorrect
-                    ? 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-800/60 text-emerald-950 dark:text-emerald-200'
-                    : isAnswered && !isCorrect
-                      ? 'bg-rose-50 dark:bg-rose-950/30 border-rose-200 dark:border-rose-800/60 text-rose-950 dark:text-rose-200'
-                      : 'bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200'
-                }`}>
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 font-black text-sm mb-2 pb-2 border-b border-slate-200/60 dark:border-slate-700/60">
-                    <div className="flex items-center gap-2">
-                      {isAnswered ? (
-                        isCorrect ? (
-                          <>
-                            <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
-                            <span>Sua resposta: correta (Alternativa {selectedOption})</span>
-                          </>
-                        ) : (
-                          <>
-                            <AlertCircle className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0" />
-                            <span>Sua resposta: incorreta (Você marcou Alternativa {selectedOption})</span>
-                          </>
-                        )
-                      ) : (
-                        <>
-                          <BookOpen className="w-4 h-4 text-indigo-600 dark:text-indigo-400 shrink-0" />
-                          <span>Questão não respondida anteriormente</span>
-                        </>
-                      )}
-                    </div>
-
-                    <div className="text-xs font-bold text-indigo-700 dark:text-indigo-300 bg-white dark:bg-slate-800 px-2.5 py-1 rounded-lg border border-slate-200 dark:border-slate-700 shrink-0">
-                      {hasValidAnswerKey ? `Gabarito da Questão: Alternativa ${q.correctAnswer}` : 'Gabarito não disponível'}
-                    </div>
-                  </div>
-
-                  <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
-                    <strong>Resolução Didática:</strong> {q.explanation || 'Comentário didático em consolidação.'}
-                  </p>
-                </div>
-              ) : (
-                // No modo de preparação, exibe a explicação apenas após o estudante responder
-                isAnswered && (
-                  <div className={`mt-5 p-4 rounded-xl border animate-fade-in ${
-                    isCorrect 
-                      ? 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-800/60 text-emerald-950 dark:text-emerald-200'
-                      : 'bg-rose-50 dark:bg-rose-950/30 border-rose-200 dark:border-rose-800/60 text-rose-950 dark:text-rose-200'
-                  }`}>
-                    <div className="flex items-center gap-2 font-black text-sm mb-1.5">
-                      {isCorrect ? (
-                        <>
-                          <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                          <span>Excelente! Resposta correta (Alternativa {q.correctAnswer}).</span>
-                        </>
-                      ) : (
-                        <>
-                          <AlertCircle className="w-4 h-4 text-rose-600 dark:text-rose-400" />
-                          <span>Atenção! Você marcou {selectedOption}, mas a alternativa correta é a {q.correctAnswer}.</span>
-                        </>
-                      )}
-                    </div>
-                    <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
-                      <strong>Resolução Didática:</strong> {q.explanation}
-                    </p>
-                  </div>
-                )
-              )}
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Card Final de Consolidação */}
-      {readOnly ? (
-        // No modo de consulta histórica: exibe consolidação sem botão de refazer
-        <div className="p-6 rounded-3xl bg-slate-900 text-white border border-slate-700/80 shadow-xl text-center space-y-3 animate-fade-in">
-          <Trophy className="w-10 h-10 text-amber-400 mx-auto" />
-          <h4 className="text-xl font-black">
-            Registro Histórico Consolidado
-          </h4>
-          <p className="text-xs sm:text-sm text-slate-300 max-w-lg mx-auto">
-            {answeredCount > 0 
-              ? `Você respondeu anteriormente a ${answeredCount} de ${questions.length} questões, com um total de ${correctCount} acertos (${Math.round((correctCount / answeredCount) * 100)}% de precisão nas respondidas).`
-              : `Nenhuma resposta foi registrada para este simulado antes do encerramento oficial da campanha. O acervo segue disponível integralmente para leitura e consulta de gabaritos.`}
-          </p>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-white/10 text-slate-300 border border-white/10">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-            <span>Modo Somente Leitura • Respostas protegidas contra alteração</span>
-          </div>
-        </div>
-      ) : (
-        // No modo de preparação: exibe conclusão com botão de refazer se todas forem respondidas
-        answeredCount === questions.length && (
-          <div className="p-6 rounded-3xl bg-gradient-to-br from-indigo-950 via-slate-900 to-indigo-900 text-white border border-indigo-700/60 shadow-xl text-center space-y-3 animate-fade-in">
-            <Trophy className="w-12 h-12 text-amber-400 mx-auto" />
-            <h4 className="text-2xl font-black">
-              Simulado Concluído!
-            </h4>
-            <p className="text-sm text-indigo-200 max-w-lg mx-auto">
-              Você acertou <strong>{correctCount} de {questions.length}</strong> questões ({Math.round((correctCount / questions.length) * 100)}% de precisão).
-              {correctCount === questions.length 
-                ? ' Desempenho excelente! Seus conhecimentos estão afiados para o ENEM 2026.' 
-                : ' Revise as explicações das questões que você errou para eliminar as dúvidas conceituais antes da prova.'}
-            </p>
-            <div className="pt-2">
-              <button
-                onClick={resetSimulado}
-                className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-6 py-2.5 rounded-xl text-sm transition-all cursor-pointer"
-              >
-                <RotateCcw className="w-4 h-4" />
-                <span>Refazer este Simulado</span>
-              </button>
-            </div>
-          </div>
-        )
-      )}
-    </div>
+    <SimuladoIntegradoView
+      stage={stage}
+      readOnly={readOnly}
+      savedAnswers={userAnswers}
+      onSaveAnswer={handleSelectAnswer}
+      onResetAnswers={resetSimulado}
+      simuladoLabel={simuladoLabel}
+    />
   );
 }

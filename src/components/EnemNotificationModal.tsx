@@ -20,6 +20,11 @@ import {
   EnemCountdownInfo, 
   ENEM_2026_DATAS 
 } from '../utils/enemCountdown';
+import { 
+  isNotificationDismissed, 
+  setNotificationDismissed, 
+  clearAllDismissedNotifications 
+} from '../utils/notificationStorage';
 
 interface EnemNotificationModalProps {
   onNavigate: (path: string) => void;
@@ -27,7 +32,7 @@ interface EnemNotificationModalProps {
 
 export const EnemNotificationModal: React.FC<EnemNotificationModalProps> = ({ onNavigate }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [dontShowAgainThisStage, setDontShowAgainThisStage] = useState(false);
+  const [dontShowAgain, setDontShowAgain] = useState(false);
   const [simulatedDate, setSimulatedDate] = useState<string | undefined>(() => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
@@ -77,17 +82,11 @@ export const EnemNotificationModal: React.FC<EnemNotificationModalProps> = ({ on
       return;
     }
 
-    // Identificadores rigorosamente independentes por etapa:
-    // - Notificação do primeiro dia: enem_2026_dismissed_etapa1 / enem_2026_session_dismissed_etapa1
-    // - Notificação do segundo dia: enem_2026_dismissed_etapa2 / enem_2026_session_dismissed_etapa2
-    const stageKey = `enem_2026_dismissed_${currentInfo.etapa}`;
-    const sessionKey = `enem_2026_session_dismissed_${currentInfo.etapa}`;
+    // Identificador único da notificação atual
+    const isDismissed = isNotificationDismissed(currentInfo.notificationId);
 
-    const dismissedThisStage = localStorage.getItem(stageKey) === 'true';
-    const dismissedThisSession = sessionStorage.getItem(sessionKey) === 'true';
-
-    // Se não foi dispensado para esta etapa específica e nem nesta sessão para esta etapa, abre com animação suave
-    if (!dismissedThisStage && !dismissedThisSession) {
+    // Se não foi dispensado permanentemente, abre com animação suave
+    if (!isDismissed) {
       const timer = setTimeout(() => {
         setIsOpen(true);
       }, 400);
@@ -97,15 +96,19 @@ export const EnemNotificationModal: React.FC<EnemNotificationModalProps> = ({ on
     }
   }, [effectiveDate]);
 
+  // Alternar checkbox "Não mostrar novamente esta notificação" com persistência imediata
+  const handleToggleDontShowAgain = (checked: boolean) => {
+    setDontShowAgain(checked);
+    if (typeof window !== 'undefined' && info.notificationId) {
+      setNotificationDismissed(info.notificationId, checked);
+    }
+  };
+
   // Fechar o modal
   const handleClose = () => {
-    if (typeof window !== 'undefined') {
-      // Salva na sessão especificamente para esta etapa
-      sessionStorage.setItem(`enem_2026_session_dismissed_${info.etapa}`, 'true');
-
-      // Se o usuário marcou "Não mostrar novamente nesta etapa", salva no localStorage para esta etapa
-      if (dontShowAgainThisStage && info.etapa !== 'encerrado') {
-        localStorage.setItem(`enem_2026_dismissed_${info.etapa}`, 'true');
+    if (typeof window !== 'undefined' && info.notificationId) {
+      if (dontShowAgain) {
+        setNotificationDismissed(info.notificationId, true);
       }
     }
     setIsOpen(false);
@@ -113,34 +116,31 @@ export const EnemNotificationModal: React.FC<EnemNotificationModalProps> = ({ on
 
   // Clique no botão principal "COMEÇAR MINHA PREPARAÇÃO"
   const handleStartPrep = () => {
-    handleClose();
+    if (typeof window !== 'undefined' && info.notificationId) {
+      if (dontShowAgain) {
+        setNotificationDismissed(info.notificationId, true);
+      }
+    }
+    setIsOpen(false);
     onNavigate('/reta-final');
   };
 
   // Simular data para teste e validação
   const handleSelectSimulatedDate = (dateStr: string) => {
     setSimulatedDate(dateStr);
+    const simulatedInfo = getEnem2026Info(dateStr);
+    setDontShowAgain(isNotificationDismissed(simulatedInfo.notificationId));
     setIsOpen(true);
-    // Remove dispensas de teste temporárias para a etapa correspondente
-    if (typeof window !== 'undefined') {
-      const simulatedInfo = getEnem2026Info(dateStr);
-      sessionStorage.removeItem(`enem_2026_session_dismissed_${simulatedInfo.etapa}`);
-      localStorage.removeItem(`enem_2026_dismissed_${simulatedInfo.etapa}`);
-    }
   };
 
   // Resetar simulação para a data real
   const handleResetRealDate = () => {
     setSimulatedDate(undefined);
-    if (typeof window !== 'undefined') {
-      sessionStorage.removeItem('enem_2026_session_dismissed_etapa1');
-      sessionStorage.removeItem('enem_2026_session_dismissed_etapa2');
-      localStorage.removeItem('enem_2026_dismissed_etapa1');
-      localStorage.removeItem('enem_2026_dismissed_etapa2');
-      const realInfo = getEnem2026Info();
-      if (realInfo.showModal) {
-        setIsOpen(true);
-      }
+    setDontShowAgain(false);
+    clearAllDismissedNotifications();
+    const realInfo = getEnem2026Info();
+    if (realInfo.showModal) {
+      setIsOpen(true);
     }
   };
 
@@ -327,19 +327,19 @@ export const EnemNotificationModal: React.FC<EnemNotificationModalProps> = ({ on
                   <label className="flex items-center gap-2 cursor-pointer select-none text-xs text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-colors">
                     <input
                       type="checkbox"
-                      checked={dontShowAgainThisStage}
-                      onChange={(e) => setDontShowAgainThisStage(e.target.checked)}
+                      checked={dontShowAgain}
+                      onChange={(e) => handleToggleDontShowAgain(e.target.checked)}
                       className="w-4 h-4 rounded text-indigo-600 border-slate-300 dark:border-slate-700 focus:ring-indigo-500 dark:focus:ring-indigo-400 bg-white dark:bg-slate-800"
                     />
-                    <span>Não mostrar novamente nesta etapa</span>
+                    <span>Não mostrar novamente esta notificação</span>
                   </label>
 
                   {/* Botão secundário de fechar */}
                   <button
                     onClick={handleClose}
-                    className="text-xs font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors py-1 px-2"
+                    className="text-xs font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors py-1 px-2.5 rounded-lg border border-transparent hover:border-slate-200 dark:hover:border-slate-700"
                   >
-                    Fechar
+                    {dontShowAgain ? 'Salvar e fechar' : 'Fechar'}
                   </button>
                 </div>
               </div>
