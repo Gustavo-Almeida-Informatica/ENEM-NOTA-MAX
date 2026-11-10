@@ -168,10 +168,10 @@ export const TimePlanner: React.FC = () => {
               <button
                 key={profile.id}
                 onClick={() => setSelectedProfileId(profile.id)}
-                className={`p-3.5 rounded-xl border text-left transition-all ${
+                className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
                   isSelected
-                    ? 'border-indigo-600 bg-indigo-50/50 dark:bg-indigo-950/50 shadow-xs'
-                    : 'border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 bg-white dark:bg-slate-800'
+                    ? 'border-indigo-600 bg-indigo-50/80 dark:bg-indigo-950/50 shadow-xs ring-1 ring-indigo-500/20'
+                    : 'border-slate-200/90 dark:border-slate-700 hover:border-indigo-300 dark:hover:border-slate-600 bg-white dark:bg-slate-800 shadow-2xs'
                 }`}
               >
                 <div className="flex items-center justify-between mb-1">

@@ -43,9 +43,9 @@ export const VideosPage: React.FC<VideosPageProps> = ({ onNavigate }) => {
       />
 
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-slate-200 dark:border-slate-800 pb-6">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-slate-200/90 dark:border-slate-800 pb-6">
         <div className="space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 dark:bg-red-950/50 text-red-700 dark:text-red-400 text-xs font-semibold">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 dark:bg-red-950/50 text-red-700 dark:text-red-400 text-xs font-semibold border border-red-200 dark:border-red-900/50">
             <Video className="w-3.5 h-3.5 text-red-600 dark:text-red-400" />
             <span>Biblioteca Curada para o ENEM</span>
           </div>
@@ -65,7 +65,7 @@ export const VideosPage: React.FC<VideosPageProps> = ({ onNavigate }) => {
             placeholder="Buscar vídeo por matéria ou canal..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 text-sm bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl shadow-2xs focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all placeholder:text-slate-400 dark:placeholder:text-slate-500"
+            className="w-full pl-10 pr-4 py-2 text-sm bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl shadow-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all placeholder:text-slate-400 dark:placeholder:text-slate-500"
           />
           {searchQuery && (
             <button
@@ -88,10 +88,10 @@ export const VideosPage: React.FC<VideosPageProps> = ({ onNavigate }) => {
             <button
               key={areaKey}
               onClick={() => setSelectedArea(areaKey)}
-              className={`px-3.5 py-2 text-xs font-bold rounded-xl whitespace-nowrap transition-all flex items-center gap-1.5 ${
+              className={`px-3.5 py-2 text-xs font-bold rounded-xl whitespace-nowrap transition-all flex items-center gap-1.5 cursor-pointer ${
                 isSelected
-                  ? 'bg-slate-900 dark:bg-indigo-600 text-white shadow-xs'
-                  : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800'
+                  ? 'bg-indigo-600 text-white shadow-xs'
+                  : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200/90 dark:border-slate-800 shadow-2xs'
               }`}
             >
               {areaInfo && (
@@ -116,7 +116,7 @@ export const VideosPage: React.FC<VideosPageProps> = ({ onNavigate }) => {
             return (
               <div 
                 key={video.id}
-                className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-2xs overflow-hidden flex flex-col justify-between hover:shadow-md transition-all"
+                className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-xs overflow-hidden flex flex-col justify-between hover:shadow-md hover:border-indigo-400/60 transition-all"
               >
                 <div>
                   {/* YouTube Embed Player */}
@@ -160,7 +160,7 @@ export const VideosPage: React.FC<VideosPageProps> = ({ onNavigate }) => {
                 <div className="p-4 pt-0">
                   <button
                     onClick={() => onNavigate(`/assunto/${video.subjectSlug}`)}
-                    className="w-full flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/60 hover:text-indigo-700 dark:hover:text-indigo-400 text-slate-700 dark:text-slate-300 text-xs font-bold transition-colors border border-slate-200/80 dark:border-slate-700"
+                    className="w-full flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/60 hover:text-indigo-700 dark:hover:text-indigo-400 text-slate-700 dark:text-slate-300 text-xs font-bold transition-colors border border-slate-200/90 dark:border-slate-700 cursor-pointer shadow-2xs"
                   >
                     <BookOpen className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
                     <span>Ler Resumo Completo deste Assunto</span>

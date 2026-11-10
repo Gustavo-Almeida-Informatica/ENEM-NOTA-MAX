@@ -1070,8 +1070,8 @@ export const RetaFinalPage: React.FC<RetaFinalPageProps> = ({ onNavigate }) => {
           {/* Conteúdo da Aba Ativa do 1º Dia */}
           {activeTabDia1 === 'linguagens' && (
             <div className="space-y-4">
-              <div className="p-4 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900/40 text-xs sm:text-sm text-indigo-900 dark:text-indigo-200 leading-relaxed">
-                <strong>Foco em Linguagens:</strong> Interpretação contextualizada, tipologias e variação linguística. Clique nos tópicos abaixo para expandir pontos-chave e estratégias para a prova.
+              <div className="p-4 rounded-2xl bg-indigo-50 text-indigo-900 border border-indigo-200 dark:bg-indigo-950/40 dark:border-indigo-900/60 dark:text-indigo-200 text-xs sm:text-sm leading-relaxed shadow-xs">
+                <strong className="text-indigo-950 dark:text-indigo-100 font-bold">Foco em Linguagens:</strong> Interpretação contextualizada, tipologias e variação linguística. Clique nos tópicos abaixo para expandir pontos-chave e estratégias para a prova.
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1082,8 +1082,8 @@ export const RetaFinalPage: React.FC<RetaFinalPageProps> = ({ onNavigate }) => {
 
           {activeTabDia1 === 'humanas' && (
             <div className="space-y-4">
-              <div className="p-4 rounded-2xl bg-amber-50/60 dark:bg-amber-950/30 border border-amber-100 dark:border-amber-900/40 text-xs sm:text-sm text-amber-900 dark:text-amber-200 leading-relaxed">
-                <strong>Foco em Ciências Humanas:</strong> Conexão entre história, geografia crítica, cidadania e pensamento social. O ENEM prioriza interpretação de documentos e análise de processos.
+              <div className="p-4 rounded-2xl bg-amber-50 text-amber-900 border border-amber-200 dark:bg-amber-950/40 dark:border-amber-900/60 dark:text-amber-200 text-xs sm:text-sm leading-relaxed shadow-xs">
+                <strong className="text-amber-950 dark:text-amber-100 font-bold">Foco em Ciências Humanas:</strong> Conexão entre história, geografia crítica, cidadania e pensamento social. O ENEM prioriza interpretação de documentos e análise de processos.
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1094,9 +1094,9 @@ export const RetaFinalPage: React.FC<RetaFinalPageProps> = ({ onNavigate }) => {
 
           {activeTabDia1 === 'redacao' && (
             <div className="space-y-4">
-              <div className="p-4 rounded-2xl bg-rose-50/60 dark:bg-rose-950/30 border border-rose-100 dark:border-rose-900/40 text-xs sm:text-sm text-rose-900 dark:text-rose-200 leading-relaxed flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+              <div className="p-4 rounded-2xl bg-rose-50 text-rose-900 border border-rose-200 dark:bg-rose-950/40 dark:border-rose-900/60 dark:text-rose-200 text-xs sm:text-sm leading-relaxed flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-xs">
                 <span>
-                  <strong>Foco em Redação:</strong> Domínio do texto dissertativo-argumentativo, projeto de texto e os 5 elementos da proposta de intervenção.
+                  <strong className="text-rose-950 dark:text-rose-100 font-bold">Foco em Redação:</strong> Domínio do texto dissertativo-argumentativo, projeto de texto e os 5 elementos da proposta de intervenção.
                 </span>
                 <button
                   onClick={() => onNavigate('/corretor')}
@@ -1131,7 +1131,7 @@ export const RetaFinalPage: React.FC<RetaFinalPageProps> = ({ onNavigate }) => {
         <section className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-6">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-5">
             <div>
-              <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400 mb-1">
+              <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 mb-1">
                 <BookMarked className="w-4 h-4" />
                 <span>{plan.isEncerrado ? 'Acervo Histórico — 2º Dia (15/11/2026)' : 'Segundo Dia do ENEM (15/11/2026)'}</span>
               </div>
@@ -1172,8 +1172,8 @@ export const RetaFinalPage: React.FC<RetaFinalPageProps> = ({ onNavigate }) => {
           {/* Conteúdos do 2º Dia */}
           {activeTabDia2 === 'matematica' && (
             <div className="space-y-4">
-              <div className="p-4 rounded-2xl bg-sky-50/60 dark:bg-sky-950/30 border border-sky-100 dark:border-sky-900/40 text-xs sm:text-sm text-sky-900 dark:text-sky-200 leading-relaxed">
-                <strong>Estratégia TRI em Matemática:</strong> Priorize as questões de proporção, escala, leitura gráfica e porcentagem antes de gastar tempo com geometria analítica ou probabilidade complexa.
+              <div className="p-4 rounded-2xl bg-blue-50 text-blue-900 border border-blue-200 dark:bg-blue-950/40 dark:border-blue-900/60 dark:text-blue-200 text-xs sm:text-sm leading-relaxed shadow-xs">
+                <strong className="text-blue-950 dark:text-blue-100 font-bold">Estratégia TRI em Matemática:</strong> Priorize as questões de proporção, escala, leitura gráfica e porcentagem antes de gastar tempo com geometria analítica ou probabilidade complexa.
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1184,8 +1184,8 @@ export const RetaFinalPage: React.FC<RetaFinalPageProps> = ({ onNavigate }) => {
 
           {activeTabDia2 === 'natureza' && (
             <div className="space-y-4">
-              <div className="p-4 rounded-2xl bg-emerald-50/60 dark:bg-emerald-950/30 border border-emerald-100 dark:border-emerald-900/40 text-xs sm:text-sm text-emerald-900 dark:text-emerald-200 leading-relaxed">
-                <strong>Ciências da Natureza (Física, Química, Biologia):</strong> Fenômenos do cotidiano, impactos ambientais, circuitos elétricos e química orgânica aplicada à saúde e energia.
+              <div className="p-4 rounded-2xl bg-emerald-50 text-emerald-900 border border-emerald-200 dark:bg-emerald-950/40 dark:border-emerald-900/60 dark:text-emerald-200 text-xs sm:text-sm leading-relaxed shadow-xs">
+                <strong className="text-emerald-950 dark:text-emerald-100 font-bold">Ciências da Natureza (Física, Química, Biologia):</strong> Fenômenos do cotidiano, impactos ambientais, circuitos elétricos e química orgânica aplicada à saúde e energia.
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1375,8 +1375,8 @@ function renderContentCard(
       key={topic.id}
       className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
         isExpanded
-          ? 'bg-slate-50/80 dark:bg-slate-800/80 border-indigo-400 dark:border-indigo-600 shadow-sm'
-          : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
+          ? 'bg-slate-50/90 dark:bg-slate-800/80 border-indigo-400 dark:border-indigo-600 shadow-sm'
+          : 'bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-xs hover:border-indigo-300 dark:hover:border-slate-700 hover:shadow-sm'
       }`}
     >
       <div 
@@ -1388,7 +1388,7 @@ function renderContentCard(
             <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
               {topic.category}
             </span>
-            <span className="text-[10px] font-semibold text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/50 px-2 py-0.5 rounded-md border border-amber-200 dark:border-amber-800/50">
+            <span className="text-[10px] font-bold text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/60 px-2 py-0.5 rounded-md border border-amber-200 dark:border-amber-800/60">
               {topic.relevanceNotice}
             </span>
           </div>
@@ -1423,8 +1423,8 @@ function renderContentCard(
           </div>
 
           {/* Dica de Estratégia de Prova */}
-          <div className="p-3 rounded-xl bg-amber-50 dark:bg-amber-950/40 border-l-4 border-amber-500 text-amber-900 dark:text-amber-200 font-medium leading-relaxed">
-            <strong>Dica prática para a prova:</strong> {topic.examStrategyTip}
+          <div className="p-3.5 rounded-xl bg-amber-50 dark:bg-amber-950/40 border-l-4 border-amber-500 text-amber-950 dark:text-amber-200 font-medium leading-relaxed">
+            <strong className="text-amber-950 dark:text-amber-100">Dica prática para a prova:</strong> {topic.examStrategyTip}
           </div>
 
           {/* Atalho Integrado */}

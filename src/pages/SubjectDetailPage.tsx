@@ -258,13 +258,7 @@ export const SubjectDetailPage: React.FC<SubjectDetailPageProps> = ({
       {/* Header Info */}
       <header className="space-y-4 border-b border-slate-200 dark:border-slate-800 pb-8">
         <div className="flex flex-wrap items-center gap-3">
-          <span 
-            className="text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1.5"
-            style={{ 
-              backgroundColor: `${area.color}15`,
-              color: area.color
-            }}
-          >
+          <span className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full border ${area.bgLight} ${area.textColor} ${area.borderLight}`}>
             <span 
               className="w-2 h-2 rounded-full" 
               style={{ backgroundColor: area.color }} 
@@ -278,13 +272,13 @@ export const SubjectDetailPage: React.FC<SubjectDetailPageProps> = ({
           </span>
 
           {subject.frequentlyTestedYears && (
-            <span className="text-[11px] text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/50 border border-amber-200 dark:border-amber-800 px-2.5 py-0.5 rounded-full font-medium">
+            <span className="text-[11px] text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/50 border border-amber-200 dark:border-amber-800 px-2.5 py-0.5 rounded-full font-semibold">
               {subject.frequentlyTestedYears}
             </span>
           )}
         </div>
 
-        <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
+        <h1 className="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
           {subject.title}
         </h1>
 
@@ -297,7 +291,7 @@ export const SubjectDetailPage: React.FC<SubjectDetailPageProps> = ({
           {subject.mindMapId && (
             <button
               onClick={() => onNavigate(`/mapas?id=${subject.mindMapId}`)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/50 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 text-xs font-bold transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 text-xs font-bold transition-colors cursor-pointer shadow-2xs"
             >
               <Network className="w-3.5 h-3.5" />
               <span>Ver Mapa Mental Deste Tema</span>
@@ -306,7 +300,7 @@ export const SubjectDetailPage: React.FC<SubjectDetailPageProps> = ({
 
           <a
             href="#video-aula"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-50 dark:bg-red-950/50 hover:bg-red-100 dark:hover:bg-red-900/50 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-800 text-xs font-bold transition-colors"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-red-50 dark:bg-red-950/50 hover:bg-red-100 dark:hover:bg-red-900/50 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-800 text-xs font-bold transition-colors shadow-2xs"
           >
             <Video className="w-3.5 h-3.5" />
             <span>Ir para Videoaula</span>
@@ -317,7 +311,7 @@ export const SubjectDetailPage: React.FC<SubjectDetailPageProps> = ({
       {/* Main Content Layout */}
       <div className="space-y-10">
         {/* 1. O que mais cai na prova */}
-        <section className="p-6 rounded-2xl bg-amber-50/70 dark:bg-amber-950/40 border border-amber-200/90 dark:border-amber-900/60 space-y-4">
+        <section className="p-6 rounded-2xl bg-amber-50/80 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900/60 shadow-xs space-y-4">
           <div className="flex items-center gap-2 text-amber-900 dark:text-amber-200">
             <Flame className="w-5 h-5 text-amber-600 dark:text-amber-400" />
             <h2 className="text-lg font-bold">
@@ -328,7 +322,7 @@ export const SubjectDetailPage: React.FC<SubjectDetailPageProps> = ({
             {subject.whatFallsMost.map((item, i) => (
               <li key={i} className="flex items-start gap-2.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 shrink-0" />
-                <span className="leading-relaxed">{item}</span>
+                <span className="leading-relaxed font-medium">{item}</span>
               </li>
             ))}
           </ul>
@@ -346,7 +340,7 @@ export const SubjectDetailPage: React.FC<SubjectDetailPageProps> = ({
             {subject.keyPoints.map((point, index) => (
               <div 
                 key={index}
-                className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700 text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed flex items-start gap-2.5"
+                className="p-4 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200/90 dark:border-slate-700 shadow-xs text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed flex items-start gap-2.5"
               >
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                 <span>{point}</span>
@@ -358,14 +352,14 @@ export const SubjectDetailPage: React.FC<SubjectDetailPageProps> = ({
         {/* 3. Resumo Direto ao Ponto */}
         <section className="space-y-4">
           <div className="flex items-center gap-2 text-slate-900 dark:text-white">
-            <BookOpen className="w-5 h-5 text-slate-700 dark:text-slate-300" />
+            <BookOpen className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
             <h2 className="text-xl font-bold">
               Resumo Direto ao Ponto
             </h2>
           </div>
           <div className="space-y-4 text-slate-700 dark:text-slate-200 text-base leading-relaxed">
             {subject.fullSummary.map((paragraph, idx) => (
-              <p key={idx} className="bg-white dark:bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs">
+              <p key={idx} className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-xs text-slate-800 dark:text-slate-200">
                 {paragraph}
               </p>
             ))}

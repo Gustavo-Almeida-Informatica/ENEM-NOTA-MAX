@@ -163,10 +163,10 @@ export const GuiaOrganizacaoProva: React.FC = () => {
   return (
     <section 
       id="guia-organizacao-prova" 
-      className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 lg:p-10 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-10 scroll-mt-24 transition-colors"
+      className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 lg:p-10 border border-slate-200/90 dark:border-slate-800 shadow-sm space-y-10 scroll-mt-24 transition-colors"
     >
       {/* 1. IDENTIDADE DO BLOCO */}
-      <div className="space-y-3 border-b border-slate-200/80 dark:border-slate-800 pb-8">
+      <div className="space-y-3 border-b border-slate-200/90 dark:border-slate-800 pb-8">
         <div className="flex flex-wrap items-center gap-2.5">
           <span className="px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 font-black text-xs uppercase tracking-wider border border-emerald-300/60 dark:border-emerald-800 flex items-center gap-1.5 shadow-2xs">
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />

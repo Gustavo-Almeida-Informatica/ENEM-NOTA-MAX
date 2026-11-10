@@ -315,10 +315,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 <button
                   key={areaKey}
                   onClick={() => setSelectedArea(areaKey)}
-                  className={`px-3.5 py-2 text-xs font-bold rounded-xl whitespace-nowrap transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 flex items-center gap-1.5 ${
+                  className={`px-3.5 py-2 text-xs font-bold rounded-xl whitespace-nowrap transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 flex items-center gap-1.5 cursor-pointer ${
                     isSelected
-                      ? 'bg-slate-900 dark:bg-indigo-600 text-white shadow-xs'
-                      : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800'
+                      ? 'bg-indigo-600 text-white shadow-sm'
+                      : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200/90 dark:border-slate-800 shadow-xs'
                   }`}
                 >
                   {areaInfo && (
@@ -344,19 +344,19 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   <div
                     key={subject.slug}
                     onClick={() => onNavigate(`/assunto/${subject.slug}`)}
-                    className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-2xs hover:shadow-md hover:border-indigo-400 dark:hover:border-indigo-500 transition-all cursor-pointer flex flex-col justify-between text-left group"
+                    className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-xs hover:shadow-md hover:border-indigo-400 dark:hover:border-indigo-500 transition-all cursor-pointer flex flex-col justify-between text-left group"
                   >
                     <div className="space-y-3">
-                      {/* Top area & reading metadata */}
-                      <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
-                        <div className="flex items-center gap-1.5 font-semibold" style={{ color: area.color }}>
+                      {/* Top area tag & reading metadata */}
+                      <div className="flex items-center justify-between text-xs">
+                        <span className={`inline-flex items-center gap-1.5 text-xs font-bold px-2.5 py-0.5 rounded-full border ${area.bgLight} ${area.textColor} ${area.borderLight}`}>
                           <span 
-                            className="w-2 h-2 rounded-full" 
+                            className="w-1.5 h-1.5 rounded-full" 
                             style={{ backgroundColor: area.color }} 
                           />
                           <span>{area.shortName}</span>
-                        </div>
-                        <span className="text-slate-400 dark:text-slate-500">
+                        </span>
+                        <span className="text-slate-500 dark:text-slate-400 font-medium text-[11px]">
                           {subject.readingTimeMinutes} min de leitura
                         </span>
                       </div>
@@ -376,25 +376,25 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                     <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
                       <div className="flex items-center gap-1.5">
                         {subject.availableFormats.includes('resumo') && (
-                          <span className="text-[10px] font-bold text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">
+                          <span className="text-[10px] font-bold text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700 px-2 py-0.5 rounded">
                             Resumo
                           </span>
                         )}
                         {subject.availableFormats.includes('video') && (
-                          <span className="text-[10px] font-bold text-red-700 dark:text-red-400 bg-red-50 dark:bg-red-950/60 px-2 py-0.5 rounded flex items-center gap-1">
+                          <span className="text-[10px] font-bold text-red-700 dark:text-red-300 bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800/60 px-2 py-0.5 rounded flex items-center gap-1">
                             <Video className="w-3 h-3" />
                             Vídeo
                           </span>
                         )}
                         {subject.availableFormats.includes('mapa') && (
-                          <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded flex items-center gap-1">
+                          <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800/60 px-2 py-0.5 rounded flex items-center gap-1">
                             <Network className="w-3 h-3" />
                             Mapa mental
                           </span>
                         )}
                       </div>
 
-                      <span className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 group-hover:translate-x-0.5 transition-transform flex items-center">
+                      <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 group-hover:translate-x-0.5 transition-transform flex items-center">
                         Ler →
                       </span>
                     </div>

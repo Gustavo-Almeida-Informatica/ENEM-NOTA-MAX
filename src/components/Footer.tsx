@@ -122,7 +122,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               <li>
                 <button
                   onClick={() => onNavigate('/#mural')}
-                  className="hover:text-sky-400 transition-colors text-left"
+                  className="hover:text-blue-400 transition-colors text-left"
                 >
                   Matemática e Exatas
                 </button>

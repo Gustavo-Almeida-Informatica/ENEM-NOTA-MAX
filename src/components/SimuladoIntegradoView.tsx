@@ -355,7 +355,7 @@ export const SimuladoIntegradoView: React.FC<SimuladoIntegradoViewProps> = ({
       </div>
 
       {/* BARRA DE PROGRESSO E SELETOR INDIVIDUAL DE QUESTÕES (1 A 10) */}
-      <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 sm:p-5 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-3">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 sm:p-5 border border-slate-200/90 dark:border-slate-800 shadow-xs space-y-3">
         <div className="flex items-center justify-between text-xs font-bold text-slate-600 dark:text-slate-300">
           <span className="flex items-center gap-1.5 text-indigo-600 dark:text-indigo-400">
             <BookOpen className="w-4 h-4" />
@@ -382,19 +382,19 @@ export const SimuladoIntegradoView: React.FC<SimuladoIntegradoViewProps> = ({
             const isCurrent = idx === currentIdx;
             const isCorrect = isAnswered && savedAnswers[q.id] === q.correctAnswer;
 
-            let pillStyle = 'border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400';
+            let pillStyle = 'border-slate-200/90 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-400 shadow-2xs';
 
             if (isFinished || readOnly) {
               if (isAnswered) {
                 pillStyle = isCorrect 
-                  ? 'border-emerald-500 bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-200 font-black' 
-                  : 'border-rose-500 bg-rose-100 dark:bg-rose-950/80 text-rose-800 dark:text-rose-200 font-black';
+                  ? 'border-emerald-500 bg-emerald-100 dark:bg-emerald-950/80 text-emerald-900 dark:text-emerald-200 font-black shadow-xs' 
+                  : 'border-rose-500 bg-rose-100 dark:bg-rose-950/80 text-rose-900 dark:text-rose-200 font-black shadow-xs';
               } else {
                 pillStyle = 'border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800/50 text-slate-400';
               }
             } else {
               if (isAnswered) {
-                pillStyle = 'border-indigo-400 bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 font-bold';
+                pillStyle = 'border-indigo-500 bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 font-bold shadow-xs';
               }
             }
 
@@ -419,7 +419,7 @@ export const SimuladoIntegradoView: React.FC<SimuladoIntegradoViewProps> = ({
 
       {/* CARD DA QUESTÃO ATIVA INDIVIDUAL */}
       {currentQ && (
-        <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-md space-y-6 animate-in fade-in duration-200">
+        <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-sm space-y-6 animate-in fade-in duration-200">
           {/* Cabeçalho da Questão: Área, Disciplina, Dificuldade e Fonte */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-4 border-b border-slate-100 dark:border-slate-800">
             <div className="flex items-center gap-2 flex-wrap">
@@ -449,7 +449,7 @@ export const SimuladoIntegradoView: React.FC<SimuladoIntegradoViewProps> = ({
 
           {/* Texto de Apoio / Contexto da Questão */}
           {currentQ.textContext && (
-            <div className="p-4 sm:p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/60 dark:border-slate-700/60 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-serif italic shadow-2xs">
+            <div className="p-4 sm:p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-700/60 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-serif italic shadow-2xs">
               "{currentQ.textContext}"
             </div>
           )}
@@ -467,16 +467,16 @@ export const SimuladoIntegradoView: React.FC<SimuladoIntegradoViewProps> = ({
               const isSelected = userChoice === opt.letter;
               const isCorrectAnswer = opt.letter === currentQ.correctAnswer;
 
-              let cardStyle = 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 hover:border-indigo-300 dark:hover:border-indigo-600 text-slate-800 dark:text-slate-200';
+              let cardStyle = 'border-slate-200/90 dark:border-slate-700 bg-white dark:bg-slate-900 hover:border-indigo-400 dark:hover:border-indigo-500 hover:bg-slate-50/50 dark:hover:bg-slate-800/50 text-slate-800 dark:text-slate-200 shadow-2xs';
               let badgeStyle = 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300';
 
               if (isFinished || readOnly) {
                 // Modo de Revisão / Gabarito Revelado
                 if (isCorrectAnswer) {
-                  cardStyle = 'border-emerald-500 bg-emerald-50/70 dark:bg-emerald-950/40 text-emerald-950 dark:text-emerald-100 font-semibold shadow-xs';
+                  cardStyle = 'border-emerald-500 bg-emerald-50/80 dark:bg-emerald-950/40 text-emerald-950 dark:text-emerald-100 font-semibold shadow-xs';
                   badgeStyle = 'bg-emerald-600 text-white';
                 } else if (isSelected && !isCorrectAnswer) {
-                  cardStyle = 'border-rose-400 bg-rose-50/70 dark:bg-rose-950/40 text-rose-950 dark:text-rose-100 font-medium';
+                  cardStyle = 'border-rose-400 bg-rose-50/80 dark:bg-rose-950/40 text-rose-950 dark:text-rose-100 font-medium shadow-2xs';
                   badgeStyle = 'bg-rose-600 text-white';
                 } else {
                   cardStyle = 'border-slate-200/70 dark:border-slate-800/70 bg-slate-50/40 dark:bg-slate-900/30 text-slate-400 dark:text-slate-500 opacity-60';
@@ -484,7 +484,7 @@ export const SimuladoIntegradoView: React.FC<SimuladoIntegradoViewProps> = ({
               } else {
                 // Durante a realização do exame (sem mostrar se acertou ou errou)
                 if (isSelected) {
-                  cardStyle = 'border-indigo-600 dark:border-indigo-500 bg-indigo-50/80 dark:bg-indigo-950/60 text-indigo-950 dark:text-indigo-100 font-semibold ring-2 ring-indigo-500/30 shadow-xs';
+                  cardStyle = 'border-indigo-600 dark:border-indigo-500 bg-indigo-50/90 dark:bg-indigo-950/60 text-indigo-950 dark:text-indigo-100 font-semibold ring-2 ring-indigo-500/20 shadow-xs';
                   badgeStyle = 'bg-indigo-600 text-white';
                 }
               }

@@ -131,7 +131,7 @@ export const CitationsPage: React.FC<CitationsPageProps> = ({ onNavigate }) => {
       </section>
 
       {/* Filter & Search Bar */}
-      <section className="space-y-4 bg-white dark:bg-slate-900 p-5 sm:p-6 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-2xs transition-colors">
+      <section className="space-y-4 bg-white dark:bg-slate-900 p-5 sm:p-6 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-xs transition-colors">
         <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
           {/* Search Box */}
           <div className="relative flex-1">
@@ -141,7 +141,7 @@ export const CitationsPage: React.FC<CitationsPageProps> = ({ onNavigate }) => {
               placeholder="Buscar por autor (Bauman, Locke), obra, lei ou palavra-chave..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-all"
+              className="w-full pl-10 pr-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200/90 dark:border-slate-700 rounded-xl focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-all shadow-2xs"
             />
             {searchQuery && (
               <button
@@ -157,10 +157,10 @@ export const CitationsPage: React.FC<CitationsPageProps> = ({ onNavigate }) => {
           <div className="flex items-center gap-1.5 overflow-x-auto pb-1">
             <button
               onClick={() => setSelectedCategory('todas')}
-              className={`px-3 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+              className={`px-3 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
                 selectedCategory === 'todas'
-                  ? 'bg-slate-900 dark:bg-indigo-600 text-white'
-                  : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+                  ? 'bg-indigo-600 text-white shadow-xs'
+                  : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200/90 dark:border-slate-700 shadow-2xs'
               }`}
             >
               Todos os Tipos
@@ -171,10 +171,10 @@ export const CitationsPage: React.FC<CitationsPageProps> = ({ onNavigate }) => {
                 <button
                   key={catKey}
                   onClick={() => setSelectedCategory(catKey)}
-                  className={`px-3 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap flex items-center gap-1.5 ${
+                  className={`px-3 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap flex items-center gap-1.5 cursor-pointer ${
                     selectedCategory === catKey
-                      ? 'bg-slate-900 dark:bg-indigo-600 text-white'
-                      : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+                      ? 'bg-indigo-600 text-white shadow-xs'
+                      : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200/90 dark:border-slate-700 shadow-2xs'
                   }`}
                 >
                   <Icon className="w-3.5 h-3.5" />
@@ -187,7 +187,7 @@ export const CitationsPage: React.FC<CitationsPageProps> = ({ onNavigate }) => {
 
         {/* Thematic Axes Pills */}
         <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
-          <label className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider block mb-2">
+          <label className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-2">
             Filtrar por Eixo Temático da Redação:
           </label>
           <div className="flex flex-wrap gap-1.5">
@@ -197,10 +197,10 @@ export const CitationsPage: React.FC<CitationsPageProps> = ({ onNavigate }) => {
                 <button
                   key={axis}
                   onClick={() => setSelectedAxis(axis)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                     isSelected
-                      ? 'bg-indigo-600 text-white shadow-2xs font-semibold'
-                      : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white'
+                      ? 'bg-indigo-600 text-white shadow-xs font-semibold'
+                      : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white border border-slate-200/80 dark:border-slate-700 shadow-2xs'
                   }`}
                 >
                   {axis}
@@ -214,7 +214,7 @@ export const CitationsPage: React.FC<CitationsPageProps> = ({ onNavigate }) => {
       {/* Citations Grid */}
       <section className="space-y-6">
         <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
-          <span>Mostrando {filteredCitations.length} repertórios correspondentes</span>
+          <span className="font-medium">Mostrando {filteredCitations.length} repertórios correspondentes</span>
         </div>
 
         {filteredCitations.length > 0 ? (
@@ -227,7 +227,7 @@ export const CitationsPage: React.FC<CitationsPageProps> = ({ onNavigate }) => {
               return (
                 <div
                   key={item.id}
-                  className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between space-y-5"
+                  className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-xs hover:shadow-md hover:border-indigo-400/60 transition-all flex flex-col justify-between space-y-5"
                 >
                   <div className="space-y-4">
                     {/* Top Category and Copy CTA */}

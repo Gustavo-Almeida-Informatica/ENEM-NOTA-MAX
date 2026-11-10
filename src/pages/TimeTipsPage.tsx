@@ -127,7 +127,7 @@ export const TimeTipsPage: React.FC<TimeTipsPageProps> = ({ onNavigate }) => {
             return (
               <div
                 key={tip.id}
-                className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between space-y-6"
+                className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-xs hover:shadow-md hover:border-indigo-400/60 transition-all flex flex-col justify-between space-y-6"
               >
                 <div className="space-y-4">
                   {/* Top Header */}
